@@ -1,0 +1,37 @@
+.navbarComponent {
+  width: 8%;
+  height: 550px;
+  border-right: 1px solid rgba(204, 204, 204, 0.9);
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+  .navbarContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+    .navbarItems {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      p {
+        margin-left: 15px;
+        font-size: 15px;
+      }
+    }
+    .hoverItem:hover {
+      background-color: rgb(242, 153, 98);
+    }
+    img {
+      padding: 15px;
+      cursor: pointer;
+      overflow: visible;
+    }
+    img:hover {
+      border-radius: 50%;
+      background-color: rgb(242, 153, 98);
+    }
+  }
+}
