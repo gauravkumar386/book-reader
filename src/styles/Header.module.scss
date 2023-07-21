@@ -1,7 +1,8 @@
 .headerComponent {
   display: flex;
   justify-content: space-between;
-  padding: 10px 30px 0 25px;
+  padding: 2rem 2rem 0 2rem;
+  margin: 0 2rem 0 2rem;
   .leftHeader {
     position: relative;
     img {
@@ -12,7 +13,6 @@
     input {
       width: 350px;
       height: 35px;
-      border-radius: 20px;
       padding: 3px;
       border: none;
       background: rgb(228, 233, 238);
@@ -38,23 +38,34 @@
       cursor: pointer;
       margin-left: 40px;
     }
+    a {
+      text-decoration: none;
+      p {
+        font-size: 20px;
+        position: absolute;
+        top: -28px;
+        left: 94%;
+        color: rgb(197, 77, 3);
+        font-weight: 600;
+      }
+    }
     a:first-child {
       img {
         border-radius: 50%;
       }
     }
-    button{
-      border-radius: 20px;
+    button {
       padding: 12px;
       cursor: pointer;
       background: rgb(242, 153, 98);
       border: none;
-      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+      font-family:cursive;
       letter-spacing: 1px;
       font-size: 15px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-    button:hover{
+    button:hover {
       opacity: 0.8;
     }
   }

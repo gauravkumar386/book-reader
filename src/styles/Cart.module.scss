@@ -1,0 +1,81 @@
+.cartContainer {
+  margin: 3rem 4rem;
+  padding: 2rem 2rem;
+  // min-height: 30rem;
+  background: #fff;
+  .cartLabel {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  }
+  .itemsContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px 15px 0;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+    align-items: center;
+    .bookCover {
+      display: flex;
+      align-items: center;
+      width: 40%;
+      img {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+      p {
+        font-size: 20px;
+        margin-left: 20px;
+        width: 50%;
+      }
+    }
+    .quantity {
+      font-size: 18px;
+      margin-left: -8rem;
+    }
+    .price {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+    }
+    .deleteIcon {
+      cursor: pointer;
+    }
+  }
+  .subTotal{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 20px 0 20px;
+    font-size: 22px;
+    align-items: center;
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    button {
+      padding: 15px;
+      margin-top: 25px;
+      cursor: pointer;
+      background-color: #000;
+      color: #fff;
+      font-family: cursive;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+}
+.emptyCartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  text-align: center;
+  a {
+    font-size: 25px;
+    margin: 20px 0;
+  }
+}

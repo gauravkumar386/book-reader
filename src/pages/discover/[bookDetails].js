@@ -7,17 +7,26 @@ import save from "../../../public/assets/bookmark.png";
 import download from "../../../public/assets/download.png";
 import share from "../../../public/assets/share.png";
 import rupee from "../../../public/assets/rupee.png";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, deleteItem } from "@/redux/action/cartAction";
 
 const BookDetails = () => {
   const route = useRouter();
+  const dispatch = useDispatch();
   const bookId = route.query.bookDetails;
+  const state = useSelector((state) => state);
   const [bookDetails, setBookDetails] = useState(null);
+  const [isBookAddedToCart, setIsBookAddedToCart] = useState(false);
+
+  useEffect(() => {
+    setIsBookAddedToCart(state.cartItems.find((x) => x.bookId === bookId));
+  }, [state.cartItems, bookId]);
 
   useEffect(() => {
     const bookDetail = bookList.find((book) => book.bookId === bookId);
     setBookDetails(bookDetail);
   }, [bookId]);
-  console.log("route", bookDetails);
+  console.log("route", state.cartItems);
   return (
     <div className={styles.bookDetailsContainer}>
       <div className={styles.upperContainer}>
@@ -37,7 +46,23 @@ const BookDetails = () => {
             {bookDetails?.bookPrice}
           </p>
           <div className={styles.buttonContainer}>
-            <button>Add to cart</button>
+            {isBookAddedToCart ? (
+              <button
+                onClick={() => {
+                  dispatch(deleteItem(bookDetails?.bookId));
+                }}
+              >
+                Remove from cart
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  dispatch(addItem(bookDetails));
+                }}
+              >
+                Add to cart
+              </button>
+            )}
             <div className={styles.shareDetails}>
               <span>
                 <Image src={save} width={23} height={23} alt="save" />
