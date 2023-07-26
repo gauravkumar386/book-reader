@@ -71,7 +71,7 @@ const Navbar = (props) => {
           />
         </div>
       </div>
-      <div style={{ width: isMenuOpen ? "82%" : "92%" }}>{props.children}</div>
+      <div style={{ width: isMenuOpen ? "82%" : "92%" }} className={styles.childrenBody}>{props.children}</div>
     </div>
   );
 };

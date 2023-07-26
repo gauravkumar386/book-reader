@@ -11,10 +11,11 @@
       left: 5%;
     }
     input {
-      width: 350px;
+      width: -webkit-fill-available;
+      min-width: 400px;
       height: 35px;
       padding: 3px;
-      border: none;
+      border: 1px solid rgb(0, 0, 0, 0.1);
       background: rgb(228, 233, 238);
       font-size: 14px;
       outline: none;
@@ -28,10 +29,27 @@
       transition-duration: 0.5s;
       background: rgb(239, 242, 245);
     }
+    .listItem {
+      background: #fff;
+      padding: 0;
+      margin: 0;
+      border: 1px solid rgb(0, 0, 0, 0.2);
+      position: absolute;
+      z-index: 2;
+      max-height: 400px;
+      overflow-y: scroll;
+      min-width: 400px;
+      li {
+        list-style: none;
+        padding: 15px;
+        cursor: pointer;
+      }
+      li:hover {
+        background: rgb(242, 153, 98);
+      }
+    }
   }
   .rightHeader {
-    position: absolute;
-    right: 10%;
     display: flex;
     align-items: center;
     img {
@@ -42,9 +60,6 @@
       text-decoration: none;
       p {
         font-size: 20px;
-        position: absolute;
-        top: -28px;
-        left: 94%;
         color: rgb(197, 77, 3);
         font-weight: 600;
       }
@@ -54,12 +69,20 @@
         border-radius: 50%;
       }
     }
+    a:last-child {
+      display: flex;
+      align-items: center;
+      p {
+        margin-top: -20px;
+        margin-left: -15px;
+      }
+    }
     button {
       padding: 12px;
       cursor: pointer;
       background: rgb(242, 153, 98);
       border: none;
-      font-family:cursive;
+      font-family: cursive;
       letter-spacing: 1px;
       font-size: 15px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),

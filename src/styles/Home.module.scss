@@ -130,3 +130,27 @@
     }
   }
 }
+
+@media only screen and (max-width: 1200px) {
+ .homeContainer{
+  .upperContainer{
+    flex-direction: column;
+    .leftContainer{
+      width: 100%;
+    }
+    .rightContainer{
+      width: 100%;
+    }
+  }
+  .lowerContainer{
+    flex-direction: column;
+    .lowerLeftContainer{
+      max-width: 100%;
+      .items{
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+    }
+  }
+ } 
+}
