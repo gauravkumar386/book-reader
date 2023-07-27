@@ -36,13 +36,11 @@
           font-family:cursive;
         }
         button:hover {
-          background-color: rgb(248, 107, 20);
-          border: 3px solid rgb(248, 107, 20);
-          color: #fff;
+          background-color: rgb(202, 193, 193);
+          border: 1px solid #000;
         }
         .shareDetails {
-          img {
-            cursor: pointer;
+          .img {
             border-radius: 50%;
             overflow: visible;
             padding: 10px;
@@ -51,11 +49,14 @@
             transition-duration: 0.3s;
             border: 1px solid #000;
           }
-          img:hover {
+          .image{
+            cursor: pointer;
+          }
+          .image:hover {
             transition-duration: 0.3s;
             transition-delay: 0.2s;
-            border: 1px solid rgb(248, 107, 20);
-            background-color: rgb(248, 107, 20);
+            border: 1px solid rgb(202, 193, 193);
+            background-color: rgb(202, 193, 193);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
               0 6px 20px 0 rgba(0, 0, 0, 0.19);
           }

@@ -17,6 +17,14 @@ const BookDetails = () => {
   const state = useSelector((state) => state);
   const [bookDetails, setBookDetails] = useState(null);
   const [isBookAddedToCart, setIsBookAddedToCart] = useState(false);
+  const [myBookList, setMyBookList] = useState([]);
+  const [isPurchased, setIsPurchased] = useState(false);
+
+  useEffect(() => {
+    setMyBookList(JSON.parse(localStorage.getItem("myBooks")));
+  }, []);
+
+  console.log("myBookList", myBookList);
 
   useEffect(() => {
     setIsBookAddedToCart(state.cartItems.find((x) => x.bookId === bookId));
@@ -24,9 +32,11 @@ const BookDetails = () => {
 
   useEffect(() => {
     const bookDetail = bookList.find((book) => book.bookId === bookId);
+    setIsPurchased(myBookList.some((x) => x.bookId === bookDetail?.bookId));
     setBookDetails(bookDetail);
-  }, [bookId]);
-  console.log("route", state.cartItems);
+  }, [bookId, myBookList]);
+
+  console.log("route", isPurchased);
   return (
     <div className={styles.bookDetailsContainer}>
       <div className={styles.upperContainer}>
@@ -46,7 +56,9 @@ const BookDetails = () => {
             {bookDetails?.bookPrice}
           </p>
           <div className={styles.buttonContainer}>
-            {isBookAddedToCart ? (
+            {isPurchased ? (
+              <button>View Book</button>
+            ) : isBookAddedToCart ? (
               <button
                 onClick={() => {
                   dispatch(deleteItem(bookDetails?.bookId));
@@ -65,13 +77,53 @@ const BookDetails = () => {
             )}
             <div className={styles.shareDetails}>
               <span>
-                <Image src={save} width={23} height={23} alt="save" />
+                <Image
+                  className={`${styles.img} ${styles.image}`}
+                  src={save}
+                  width={23}
+                  height={23}
+                  alt="save"
+                />
               </span>
               <span>
-                <Image src={share} width={21} height={21} alt="share" />
+                {isPurchased ? (
+                  <Image
+                    className={`${styles.img} ${styles.image}`}
+                    src={share}
+                    width={21}
+                    height={21}
+                    alt="share"
+                  />
+                ) : (
+                  <Image
+                    className={styles.img}
+                    style={{ opacity: "0.5" }}
+                    src={share}
+                    width={21}
+                    height={21}
+                    alt="share"
+                  />
+                )}
               </span>
               <span>
-                <Image src={download} width={22} height={22} alt="download" />
+                {isPurchased ? (
+                  <Image
+                    className={`${styles.img} ${styles.image}`}
+                    src={download}
+                    width={22}
+                    height={22}
+                    alt="download"
+                  />
+                ) : (
+                  <Image
+                    className={styles.img}
+                    style={{ opacity: "0.5" }}
+                    src={download}
+                    width={22}
+                    height={22}
+                    alt="download"
+                  />
+                )}
               </span>
             </div>
           </div>

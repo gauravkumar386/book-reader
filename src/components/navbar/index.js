@@ -6,10 +6,12 @@ import styles from "@/styles/Navbar.module.scss";
 
 import logo from "../../../public/assets/book-reader-logo.png";
 import menu from "../../../public/assets/hamburger.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
+import { MyContext } from "@/shared/MyContext";
 
 const Navbar = (props) => {
+  const { darkMode } = useContext(MyContext)
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [linkValue, setLinkValue] = useState("");
@@ -22,7 +24,10 @@ const Navbar = (props) => {
         <Link href="/">
           <Image src={logo} width={100} height={80} alt="logo" />
         </Link>
-        <div className={styles.navbarContainer}>
+        <div
+          className={styles.navbarContainer}
+          style={{ alignItems: isMenuOpen ? "" : "center" }}
+        >
           {navigation.map((data, key) => {
             return (
               <Link href={data?.link} key={key}>
@@ -34,7 +39,7 @@ const Navbar = (props) => {
                   style={{
                     backgroundColor:
                       router?.pathname === data?.link && isMenuOpen
-                        ? "rgb(242, 153, 98)"
+                        ? "rgb(202, 193, 193)"
                         : "",
                   }}
                   onClick={() => {
@@ -50,7 +55,7 @@ const Navbar = (props) => {
                     style={{
                       backgroundColor:
                         router?.pathname === data?.link
-                          ? "rgb(242, 153, 98)"
+                          ? "rgb(202, 193, 193)"
                           : "",
                       borderRadius:
                         router?.pathname === data?.link ? "50%" : "100%",
@@ -71,7 +76,12 @@ const Navbar = (props) => {
           />
         </div>
       </div>
-      <div style={{ width: isMenuOpen ? "82%" : "92%" }} className={styles.childrenBody}>{props.children}</div>
+      <div
+        style={{ width: isMenuOpen ? "82%" : "92%" }}
+        className={styles.childrenBody}
+      >
+        {props.children}
+      </div>
     </div>
   );
 };

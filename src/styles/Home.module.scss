@@ -1,13 +1,14 @@
 .homeContainer {
-  padding: 10px 30px 0 30px;
+  // padding: 10px 30px 0 30px;
+  padding: 1rem 4rem 0 4rem;
   .upperContainer {
     display: flex;
     gap: 100px;
     margin: 20px 0;
     .leftContainer {
-      width: 45%;
+      width: 90%;
       .title {
-        font-size: 55px;
+        font-size: 50px;
       }
       .subtitle {
         font-size: 20px;
@@ -23,38 +24,24 @@
         background: #000;
         color: #fff;
         padding: 12px;
-        font-family:cursive;
+        font-family: cursive;
       }
       .button:hover {
-        background: #fff;
+        background: rgb(202, 193, 193);
         color: #000;
-      }
-    }
-    .rightContainer {
-      width: 50%;
-      .bookContainer {
-        display: flex !important;
-        .description {
-          padding: 0px 100px 0 50px;
-          .title {
-            font-size: 30px;
-            font-weight: 500;
-          }
-        }
       }
     }
   }
   .lowerContainer {
     display: flex;
     .lowerLeftContainer {
-      max-width: 60%;
       .header {
         display: flex;
         align-items: center;
-        padding-top: 30px;
+        padding: 30px 0;
         gap: 20px;
         .title {
-          font-size: 22px;
+          font-size: 28px;
         }
       }
       .items {
@@ -78,8 +65,8 @@
             filter: grayscale(100%);
           }
           p {
-            width: 60%;
-            font-size: 15px;
+            width: 70%;
+            font-size: 20px;
           }
         }
       }
@@ -93,64 +80,31 @@
           margin-bottom: 15px;
         }
       }
-      .reviewList {
-        max-height: 300px;
-        overflow-y: scroll;
-        .reviewBody {
-          display: flex;
-          img {
-            border-radius: 50%;
-          }
-          .description {
-            padding: 0 30px;
-            p:first-child {
-              font-size: 20px;
-              font-weight: 500;
-            }
-            p:nth-child(2) {
-              font-size: 15px;
-              font-style: italic;
-            }
-            p:last-child {
-              font-size: 16px;
-              color: rgb(248, 107, 20);
-            }
-          }
+    }
+  }
+  .booksCarousel {
+    background: rgb(239, 242, 245);
+    margin: 5rem 0;
+    background: linear-gradient(
+      to right,
+      rgb(228, 227, 227) 0%,
+      rgb(228, 227, 227) 33%,
+      rgb(239, 242, 245) 33%,
+      rgb(239, 242, 245) 100%
+    );
+    .bookContainer {
+      display: flex !important;
+      padding: 3rem;
+      .description {
+        padding: 0 5rem 0 10rem;
+        .title {
+          font-size: 30px;
+          font-weight: 500;
+        }
+        .shortDescription {
+          width: 70%;
         }
       }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      }
-      ::-webkit-scrollbar-thumb {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 1);
-      }
     }
   }
-}
-
-@media only screen and (max-width: 1200px) {
- .homeContainer{
-  .upperContainer{
-    flex-direction: column;
-    .leftContainer{
-      width: 100%;
-    }
-    .rightContainer{
-      width: 100%;
-    }
-  }
-  .lowerContainer{
-    flex-direction: column;
-    .lowerLeftContainer{
-      max-width: 100%;
-      .items{
-        flex-wrap: wrap;
-        justify-content: flex-start;
-      }
-    }
-  }
- } 
 }

@@ -45,7 +45,7 @@
         cursor: pointer;
       }
       li:hover {
-        background: rgb(242, 153, 98);
+        background: rgb(202, 193, 193);
       }
     }
   }
@@ -60,7 +60,7 @@
       text-decoration: none;
       p {
         font-size: 20px;
-        color: rgb(197, 77, 3);
+        color: #000;
         font-weight: 600;
       }
     }
@@ -80,16 +80,17 @@
     button {
       padding: 12px;
       cursor: pointer;
-      background: rgb(242, 153, 98);
+      background: #000;
+      color: #fff;
       border: none;
       font-family: cursive;
       letter-spacing: 1px;
       font-size: 15px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border: 1px solid #000;
     }
     button:hover {
-      opacity: 0.8;
+      background: #fff;
+      color: #000;
     }
   }
 }

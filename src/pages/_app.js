@@ -4,17 +4,23 @@ import Header from "@/components/header";
 import Navbar from "@/components/navbar";
 import "@/styles/globals.scss";
 import cartReducer from "@/redux/reducer/cartReducer";
+import { createContext, useState } from "react";
+import { MyContext } from "@/shared/MyContext";
 
 const store = createStore(cartReducer);
+const LightModeContext = createContext();
 
 export default function App({ Component, pageProps }) {
+  const [darkMode, setDarkMode] = useState(false);
   return (
     <>
       <Provider store={store}>
-        <Navbar>
-          <Header />
-          <Component {...pageProps} />
-        </Navbar>
+        <MyContext.Provider value={{ darkMode }}>
+          <Navbar>
+            <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+            <Component {...pageProps} />
+          </Navbar>
+        </MyContext.Provider>
       </Provider>
     </>
   );

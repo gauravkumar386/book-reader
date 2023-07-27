@@ -31,29 +31,6 @@ export default function Home() {
             <button className={styles.button}>{"Start Reading ->"}</button>
           </Link>
         </div>
-        <div className={styles.rightContainer}>
-          <Slider {...settings}>
-            {bookList.map((book, index) => {
-              return (
-                <div key={index} className={styles.bookContainer}>
-                  <Image
-                    src={book.bookCover}
-                    width={250}
-                    height={250}
-                    alt={book.bookTitle}
-                  />
-                  <div className={styles.description}>
-                    <div className={styles.title}>{book.bookTitle}</div>
-                    <p className={styles.shortDescription}>
-                      {book.shortDescription}
-                    </p>
-                    <p>- {book.author}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </Slider>
-        </div>
       </div>
       <div className={styles.lowerContainer}>
         <div className={styles.lowerLeftContainer}>
@@ -75,8 +52,8 @@ export default function Home() {
                     <Link href={`/discover/${book.bookId}`}>
                       <Image
                         src={book.bookCover}
-                        width={150}
-                        height={200}
+                        width={200}
+                        height={300}
                         alt={book.bookTitle}
                       />
                     </Link>
@@ -87,33 +64,56 @@ export default function Home() {
             })}
           </div>
         </div>
-        <div className={styles.lowerRightContainer}>
-          <div className={styles.header}>
-            <p>User Reviews</p>
-          </div>
-          <div className={styles.reviewList}>
-            {bookList.map((book) => {
-              return book.reviews.map((user, index) => {
-                return (
-                  <div key={index} className={styles.reviewBody}>
-                    <Image
-                      src={user.userImage}
-                      width={70}
-                      height={70}
-                      alt="user"
-                    />
-                    <div className={styles.description}>
-                      <p>{user.userName}</p>
-                      <p>{user.comments}</p>
-                      <p>~ {book.bookTitle}</p>
-                    </div>
-                  </div>
-                );
-              });
-            })}
-          </div>
-        </div>
       </div>
+      <div className={styles.booksCarousel}>
+        <Slider {...settings}>
+          {bookList.map((book, index) => {
+            return (
+              <div key={index} className={styles.bookContainer}>
+                <Image
+                  src={book.bookCover}
+                  width={260}
+                  height={380}
+                  alt={book.bookTitle}
+                />
+                <div className={styles.description}>
+                  <div className={styles.title}>{book.bookTitle}</div>
+                  <p className={styles.shortDescription}>
+                    {book.shortDescription}
+                  </p>
+                  <p>- {book.author}</p>
+                </div>
+              </div>
+            );
+          })}
+        </Slider>
+      </div>
+      {/* <div className={styles.lowerRightContainer}>
+        <div className={styles.header}>
+          <p>User Reviews</p>
+        </div>
+        <div className={styles.reviewList}>
+          {bookList.map((book) => {
+            return book.reviews.map((user, index) => {
+              return (
+                <div key={index} className={styles.reviewBody}>
+                  <Image
+                    src={user.userImage}
+                    width={70}
+                    height={70}
+                    alt="user"
+                  />
+                  <div className={styles.description}>
+                    <p>{user.userName}</p>
+                    <p>{user.comments}</p>
+                    <p>~ {book.bookTitle}</p>
+                  </div>
+                </div>
+              );
+            });
+          })}
+        </div>
+      </div> */}
     </div>
   );
 }
