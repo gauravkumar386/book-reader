@@ -17,26 +17,34 @@ const Header = ({ darkMode, setDarkMode }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [show, setShow] = useState(false);
+  const [pageOffset, setPageOffset] = useState(0);
 
-  // useEffect(() => {
-  //   const bodyId = document.getElementById("bodyContainer");
-  //   console.log('111111',bodyId)
-  //   if (show && bodyId) {
-  //     bodyId.style.position = "fixed";
-  //     bodyId.style.background = "rgba(0,0,0,0.5)";
-  //     bodyId.style.left = "0";
-  //     bodyId.style.right = "0";
-  //     bodyId.style.zIndex = "2";
-  //   }else{
-  //     bodyId.style.position = "";
-  //     bodyId.style.background = "";
-  //   }
-  // }, [show]);
+  useEffect(()=>{
+    if(typeof window !== "undefined"){
+      window.onscroll = function (e) {  
+        setPageOffset(window.pageYOffset)
+      }
+    } 
+  },[])
+
+  useEffect(() => {
+    const bodyId = document.getElementById("bodyContainer");
+    if (show && bodyId) {
+      bodyId.style.position = "fixed";
+      bodyId.style.background = "rgba(0,0,0,0.5)";
+      bodyId.style.left = "0";
+      bodyId.style.right = "0";
+      bodyId.style.zIndex = "2";
+    } else {
+      bodyId.style.position = "";
+      bodyId.style.background = "";
+    }
+  }, [show]);
 
   return (
     <>
       {show && <LoginComponent setShow={setShow} />}
-      <div className={styles.headerComponent}>
+      <div className={`${styles.headerComponent} ${pageOffset >= 40 ? styles.showBackground : ""}`}>
         <div className={styles.leftHeader}>
           <>
             <Image src={search} width={22} height={22} alt="search" />

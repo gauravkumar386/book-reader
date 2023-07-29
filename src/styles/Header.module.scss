@@ -1,8 +1,19 @@
 .headerComponent {
+  position: sticky;
+  z-index: 3;
+  top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 2rem 2rem 0 2rem;
-  margin: 0 2rem 0 2rem;
+  padding: 2rem 4rem 1rem 4rem;
+  &.showBackground {
+    background: linear-gradient(
+      to right,
+      rgb(239, 242, 245,0.96) 0%,
+      rgb(239, 242, 245,0.96) 34.75%,
+      rgb(235, 233, 233,0.96) 34.75%,
+      rgb(228, 227, 227,0.96) 100%
+    );
+  }
   .leftHeader {
     position: relative;
     img {
