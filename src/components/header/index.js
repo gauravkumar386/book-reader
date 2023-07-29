@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { bookList } from "@/constants";
 import { useRouter } from "next/router";
 import LoginComponent from "../login";
+import CustomButton from "@/organisms/Button";
 
 const Header = ({ darkMode, setDarkMode }) => {
   const router = useRouter();
@@ -19,13 +20,13 @@ const Header = ({ darkMode, setDarkMode }) => {
   const [show, setShow] = useState(false);
   const [pageOffset, setPageOffset] = useState(0);
 
-  useEffect(()=>{
-    if(typeof window !== "undefined"){
-      window.onscroll = function (e) {  
-        setPageOffset(window.pageYOffset)
-      }
-    } 
-  },[])
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.onscroll = function (e) {
+        setPageOffset(window.pageYOffset);
+      };
+    }
+  }, []);
 
   useEffect(() => {
     const bodyId = document.getElementById("bodyContainer");
@@ -44,7 +45,11 @@ const Header = ({ darkMode, setDarkMode }) => {
   return (
     <>
       {show && <LoginComponent setShow={setShow} />}
-      <div className={`${styles.headerComponent} ${pageOffset >= 40 ? styles.showBackground : ""}`}>
+      <div
+        className={`${styles.headerComponent} ${
+          pageOffset >= 40 ? styles.showBackground : ""
+        }`}
+      >
         <div className={styles.leftHeader}>
           <>
             <Image src={search} width={22} height={22} alt="search" />
@@ -81,9 +86,9 @@ const Header = ({ darkMode, setDarkMode }) => {
           )}
         </div>
         <div className={styles.rightHeader}>
-          <button onClick={() => setDarkMode(!darkMode)}>
+          <CustomButton onClickButton={() => setDarkMode(!darkMode)}>
             {darkMode ? "Set Light" : "Set Dark"}
-          </button>
+          </CustomButton>
           &nbsp;&nbsp;
           {isUserLoggedIn ? (
             <>
@@ -93,7 +98,9 @@ const Header = ({ darkMode, setDarkMode }) => {
               &nbsp; &nbsp; Alexander Mark
             </>
           ) : (
-            <button onClick={() => setShow(true)}>Login/SignUp</button>
+            <CustomButton onClickButton={() => setShow(true)}>
+              Login/SignUp
+            </CustomButton>
           )}
           <Link href="/cart">
             <Image src={cart} width={30} height={30} alt="search" />

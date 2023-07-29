@@ -29,16 +29,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        button {
-          font-size: 14px;
-          padding: 10px;
-          cursor: pointer;
-          font-family:cursive;
-        }
-        button:hover {
-          background-color: rgb(202, 193, 193);
-          border: 1px solid #000;
-        }
         .shareDetails {
           .img {
             border-radius: 50%;

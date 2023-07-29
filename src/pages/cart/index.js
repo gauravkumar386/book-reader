@@ -7,6 +7,7 @@ import { deleteAllItem, deleteItem } from "@/redux/action/cartAction";
 import emptyCart from "../../../public/assets/box.png";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import CustomButton from "@/organisms/Button";
 
 const Cart = () => {
   const state = useSelector((state) => state);
@@ -21,11 +22,11 @@ const Cart = () => {
     setSubTotal(subTotal);
   }, [state.cartItems]);
 
-  const checkoutItem=()=>{
-    window.location.href="/";
-    localStorage.setItem('myBooks',JSON.stringify(state.cartItems));
+  const checkoutItem = () => {
+    window.location.href = "/";
+    localStorage.setItem("myBooks", JSON.stringify(state.cartItems));
     dispatch(deleteAllItem());
-  }
+  };
 
   return (
     <>
@@ -67,13 +68,17 @@ const Cart = () => {
             );
           })}
           <div className={styles.subTotal}>
-            Subtotal: &nbsp;<Image src={rupee} width={20} height={20} alt="currency" />{subTotal}
+            Subtotal: &nbsp;
+            <Image src={rupee} width={20} height={20} alt="currency" />
+            {subTotal}
           </div>
           <div className={styles.buttonContainer}>
             <Link href="/discover">
-              <button>Continue Browsing</button>
+              <CustomButton>Continue Browsing</CustomButton>
             </Link>
-            <button onClick={checkoutItem}>Checkout</button>
+            <CustomButton onClickButton={checkoutItem}>
+              Checkout
+            </CustomButton>
           </div>
         </div>
       ) : (

@@ -1,3 +1,4 @@
+import CustomButton from "@/organisms/Button";
 import styles from "@/styles/Login.module.scss";
 import { useEffect, useState } from "react";
 
@@ -26,8 +27,10 @@ const LoginComponent = ({ setShow }) => {
         <div className={styles.loginBody}>SignUp Body</div>
       )}
       <div className={styles.loginFooter}>
-        <button onClick={() => setShow(false)}>Cancel</button>
-        <button>Submit</button>
+        <CustomButton minWidth={'300px'} onClickButton={() => setShow(false)}>
+          Cancel
+        </CustomButton>
+        <CustomButton minWidth={'300px'}>Submit</CustomButton>
       </div>
     </div>
   );

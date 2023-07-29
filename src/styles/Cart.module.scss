@@ -52,19 +52,7 @@
   .buttonContainer {
     display: flex;
     justify-content: space-between;
-    button {
-      padding: 15px;
-      margin-top: 25px;
-      cursor: pointer;
-      background-color: #000;
-      color: #fff;
-      font-family: cursive;
-      font-size: 14px;
-    }
-    button:hover {
-      background-color: #fff;
-      color: #000;
-    }
+    padding-top: 1.5rem;
   }
 }
 .emptyCartContainer {

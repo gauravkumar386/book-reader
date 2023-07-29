@@ -5,6 +5,8 @@ import Image from "next/image";
 import { bookList } from "../constants";
 import { useEffect, useState } from "react";
 import rightArrow from "../../public/assets/right-arrow.png";
+import { Button } from "@mui/material";
+import CustomButton from "@/organisms/Button";
 
 export default function Home() {
   const settings = {
@@ -28,7 +30,7 @@ export default function Home() {
            Oops, looks like you're not there yet. Get Reading now!`}
           </div>
           <Link href="/discover">
-            <button className={styles.button}>{"Start Reading ->"}</button>
+            <CustomButton>{"Start Reading ->"}</CustomButton>
           </Link>
         </div>
       </div>

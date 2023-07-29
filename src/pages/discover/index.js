@@ -5,6 +5,7 @@ import { bookList } from "../../constants";
 import { useEffect, useState } from "react";
 import rightArrow from "../../../public/assets/right-arrow.png";
 import styles from "@/styles/Discover.module.scss";
+import CustomButton from "@/organisms/Button";
 
 const Discover = () => {
   const [sliderRef, setSliderRef] = useState(null);
@@ -31,7 +32,7 @@ const Discover = () => {
         }
       </div>
       <Link href="/discover">
-        <button className={styles.button}>{"Start Reading ->"}</button>
+        <CustomButton>{"Start Reading ->"}</CustomButton>
       </Link>
       <div>
         <div className={styles.slickArrows}>

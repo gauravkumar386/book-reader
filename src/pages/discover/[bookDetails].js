@@ -9,6 +9,7 @@ import share from "../../../public/assets/share.png";
 import rupee from "../../../public/assets/rupee.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem } from "@/redux/action/cartAction";
+import CustomButton from "@/organisms/Button";
 
 const BookDetails = () => {
   const route = useRouter();
@@ -57,23 +58,15 @@ const BookDetails = () => {
           </p>
           <div className={styles.buttonContainer}>
             {isPurchased ? (
-              <button>View Book</button>
+              <CustomButton>View Book</CustomButton>
             ) : isBookAddedToCart ? (
-              <button
-                onClick={() => {
-                  dispatch(deleteItem(bookDetails?.bookId));
-                }}
-              >
-                Remove from cart
-              </button>
+              <CustomButton onClickButton={() => {
+                dispatch(deleteItem(bookDetails?.bookId));
+              }}>Remove from cart</CustomButton>
             ) : (
-              <button
-                onClick={() => {
-                  dispatch(addItem(bookDetails));
-                }}
-              >
-                Add to cart
-              </button>
+              <CustomButton onClickButton={() => {
+                dispatch(addItem(bookDetails));
+              }}>Add to cart</CustomButton>
             )}
             <div className={styles.shareDetails}>
               <span>

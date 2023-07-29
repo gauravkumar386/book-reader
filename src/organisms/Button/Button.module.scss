@@ -1,0 +1,17 @@
+.customButton {
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  font-family: cursive;
+  border: 1px solid #000;
+  border-radius: 0;
+}
+
+.customButton:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
