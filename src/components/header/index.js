@@ -2,15 +2,22 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import search from "../../../public/assets/search.png";
 import profile from "../../../public/assets/dummyProfile.webp";
-import cart from "../../../public/assets/shoppingCart.png";
 import styles from "@/styles/Header.module.scss";
 import { useSelector } from "react-redux";
 import { bookList } from "@/constants";
 import { useRouter } from "next/router";
 import LoginComponent from "../login";
 import CustomButton from "@/organisms/Button";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { createPortal } from "react-dom";
+
+const modalContent =
+  typeof document !== "undefined" && document.getElementById("modal-root");
 
 const Header = ({ darkMode, setDarkMode }) => {
   const router = useRouter();
@@ -19,8 +26,10 @@ const Header = ({ darkMode, setDarkMode }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [show, setShow] = useState(false);
   const [pageOffset, setPageOffset] = useState(0);
+  const [domReady, setDomReady] = useState(false);
 
   useEffect(() => {
+    setDomReady(true);
     if (typeof window !== "undefined") {
       window.onscroll = function (e) {
         setPageOffset(window.pageYOffset);
@@ -29,67 +38,62 @@ const Header = ({ darkMode, setDarkMode }) => {
   }, []);
 
   useEffect(() => {
-    const bodyId = document.getElementById("bodyContainer");
-    if (show && bodyId) {
-      bodyId.style.position = "fixed";
-      bodyId.style.background = "rgba(0,0,0,0.5)";
-      bodyId.style.left = "0";
-      bodyId.style.right = "0";
-      bodyId.style.zIndex = "2";
-    } else {
-      bodyId.style.position = "";
-      bodyId.style.background = "";
+    const bodyId = document.getElementById("app-root");
+    if(show){
+      bodyId.classList.add("overlay")
+    }else{
+      bodyId.classList.remove("overlay")
     }
   }, [show]);
 
   return (
     <>
-      {show && <LoginComponent setShow={setShow} />}
+      {domReady && createPortal(show && <LoginComponent setShow={setShow} />, modalContent)}
       <div
         className={`${styles.headerComponent} ${
           pageOffset >= 40 ? styles.showBackground : ""
         }`}
       >
         <div className={styles.leftHeader}>
-          <>
-            <Image src={search} width={22} height={22} alt="search" />
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search book name, author, edition..."
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-              }}
-            />
-          </>
-          {searchQuery && (
-            <ul className={styles.listItem}>
-              {bookList
-                .filter((x) =>
-                  x.bookTitle.toLowerCase().includes(searchQuery.toLowerCase())
-                )
-                .map((book, index) => {
-                  return (
-                    <li
-                      key={index}
-                      onClick={() => {
-                        setSearchQuery("");
-                        document.getElementById("searchInput").value = "";
-                        router.push(`/discover/${book.bookId}`);
-                      }}
-                    >
-                      {book.bookTitle}
-                    </li>
-                  );
-                })}
-            </ul>
-          )}
+          <Autocomplete
+            freeSolo
+            id="free-solo-2-demo"
+            disableClearable
+            sx={{ width: 400 }}
+            options={bookList.map((option) => option.bookTitle)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search book name, author, edition..."
+                InputProps={{
+                  ...params.InputProps,
+                  type: "search",
+                }}
+              />
+            )}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.defaultMuiPrevented = true;
+                const book = bookList.find(
+                  (x) => x.bookTitle === event.target.value
+                );
+                router.push(`/discover/${book.bookId}`);
+              }
+            }}
+          />
         </div>
         <div className={styles.rightHeader}>
-          <CustomButton onClickButton={() => setDarkMode(!darkMode)}>
-            {darkMode ? "Set Light" : "Set Dark"}
-          </CustomButton>
-          &nbsp;&nbsp;
+          {!darkMode ? (
+            <DarkModeIcon
+              className={styles.darkModeIcon}
+              onClick={() => setDarkMode(true)}
+            />
+          ) : (
+            <LightModeIcon
+              className={styles.darkModeIcon}
+              onClick={() => setDarkMode(false)}
+            />
+          )}
           {isUserLoggedIn ? (
             <>
               <Link href="/settings">
@@ -103,7 +107,7 @@ const Header = ({ darkMode, setDarkMode }) => {
             </CustomButton>
           )}
           <Link href="/cart">
-            <Image src={cart} width={30} height={30} alt="search" />
+            <ShoppingCartOutlinedIcon />
             <p>{state.cartItems.length}</p>
           </Link>
         </div>

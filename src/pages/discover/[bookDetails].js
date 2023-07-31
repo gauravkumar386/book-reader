@@ -3,13 +3,13 @@ import { bookList } from "../../constants";
 import { useEffect, useState } from "react";
 import styles from "@/styles/BookDetails.module.scss";
 import Image from "next/image";
-import save from "../../../public/assets/bookmark.png";
-import download from "../../../public/assets/download.png";
-import share from "../../../public/assets/share.png";
 import rupee from "../../../public/assets/rupee.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem } from "@/redux/action/cartAction";
 import CustomButton from "@/organisms/Button";
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 const BookDetails = () => {
   const route = useRouter();
@@ -25,8 +25,6 @@ const BookDetails = () => {
     setMyBookList(JSON.parse(localStorage.getItem("myBooks")));
   }, []);
 
-  console.log("myBookList", myBookList);
-
   useEffect(() => {
     setIsBookAddedToCart(state.cartItems.find((x) => x.bookId === bookId));
   }, [state.cartItems, bookId]);
@@ -37,7 +35,6 @@ const BookDetails = () => {
     setBookDetails(bookDetail);
   }, [bookId, myBookList]);
 
-  console.log("route", isPurchased);
   return (
     <div className={styles.bookDetailsContainer}>
       <div className={styles.upperContainer}>
@@ -70,53 +67,13 @@ const BookDetails = () => {
             )}
             <div className={styles.shareDetails}>
               <span>
-                <Image
-                  className={`${styles.img} ${styles.image}`}
-                  src={save}
-                  width={23}
-                  height={23}
-                  alt="save"
-                />
+                <BookmarkBorderOutlinedIcon/>
               </span>
               <span>
-                {isPurchased ? (
-                  <Image
-                    className={`${styles.img} ${styles.image}`}
-                    src={share}
-                    width={21}
-                    height={21}
-                    alt="share"
-                  />
-                ) : (
-                  <Image
-                    className={styles.img}
-                    style={{ opacity: "0.5" }}
-                    src={share}
-                    width={21}
-                    height={21}
-                    alt="share"
-                  />
-                )}
+              <ShareOutlinedIcon/>
               </span>
               <span>
-                {isPurchased ? (
-                  <Image
-                    className={`${styles.img} ${styles.image}`}
-                    src={download}
-                    width={22}
-                    height={22}
-                    alt="download"
-                  />
-                ) : (
-                  <Image
-                    className={styles.img}
-                    style={{ opacity: "0.5" }}
-                    src={download}
-                    width={22}
-                    height={22}
-                    alt="download"
-                  />
-                )}
+                <FileDownloadOutlinedIcon/>
               </span>
             </div>
           </div>

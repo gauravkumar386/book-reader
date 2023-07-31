@@ -1,22 +1,36 @@
 .navbarComponent {
   width: 8%;
-  height: 550px;
+  height: 36rem;
   border-right: 1px solid rgba(204, 204, 204, 0.9);
   transition-duration: 0.3s;
   transition-timing-function: linear;
   position: sticky;
   top: 0;
+  flex-direction: column;
+  align-items: center;
+  a {
+    text-decoration: none;
+    color: #000;
+    align-items: center;
+    .logo {
+      padding: 2rem 0;
+      width: 40px;
+      height: 40px;
+    }
+    p{
+      font-family: cursive;
+      margin-left: 1.5rem;
+      font-size: 20px;
+    }
+  }
   .navbarContainer {
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    a {
-      text-decoration: none;
-      color: #000;
-    }
+    padding: 0 15px;
     .navbarItems {
       display: flex;
       align-items: center;
+      margin: 1px 0;
       cursor: pointer;
       p {
         margin-left: 15px;
@@ -26,12 +40,12 @@
     .hoverItem:hover {
       background-color: rgb(202, 193, 193);
     }
-    img {
+    svg {
       padding: 15px;
       cursor: pointer;
       overflow: visible;
     }
-    img:hover {
+    svg:hover {
       border-radius: 50%;
       background-color: rgb(202, 193, 193);
     }

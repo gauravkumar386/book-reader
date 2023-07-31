@@ -4,68 +4,43 @@
   top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 2rem 4rem 1rem 4rem;
+  padding: 1.5rem 4rem 1rem 4rem;
   &.showBackground {
     background: linear-gradient(
       to right,
-      rgb(239, 242, 245,0.96) 0%,
-      rgb(239, 242, 245,0.96) 34.75%,
-      rgb(235, 233, 233,0.96) 34.75%,
-      rgb(228, 227, 227,0.96) 100%
+      rgb(239, 242, 245, 0.96) 0%,
+      rgb(239, 242, 245, 0.96) 34.75%,
+      rgb(235, 233, 233, 0.96) 34.75%,
+      rgb(228, 227, 227, 0.96) 100%
     );
   }
   .leftHeader {
     position: relative;
-    img {
-      position: absolute;
-      top: 10px;
-      left: 5%;
-    }
+    // svg {
+    //   position: absolute;
+    //   top: 18px;
+    //   left: 5%;
+    // }
     input {
-      width: -webkit-fill-available;
-      min-width: 400px;
-      height: 35px;
-      padding: 3px;
-      border: 1px solid rgb(0, 0, 0, 0.1);
-      background: rgb(228, 233, 238);
+      min-width: 370px;
+      height: 22px;
       font-size: 14px;
       outline: none;
       cursor: pointer;
-      text-indent: 45px;
-    }
-    input::placeholder {
-      padding: 5px;
-    }
-    input:hover {
-      transition-duration: 0.5s;
-      background: rgb(239, 242, 245);
-    }
-    .listItem {
-      background: #fff;
-      padding: 0;
-      margin: 0;
-      border: 1px solid rgb(0, 0, 0, 0.2);
-      position: absolute;
-      z-index: 2;
-      max-height: 400px;
-      overflow-y: scroll;
-      min-width: 400px;
-      li {
-        list-style: none;
-        padding: 15px;
-        cursor: pointer;
-      }
-      li:hover {
-        background: rgb(202, 193, 193);
-      }
     }
   }
   .rightHeader {
     display: flex;
     align-items: center;
-    img {
+    .darkModeIcon {
+      margin-right: 3rem;
+    }
+    svg {
       cursor: pointer;
       margin-left: 40px;
+      height: 35px;
+      width: 35px;
+      color: #000;
     }
     a {
       text-decoration: none;
@@ -76,7 +51,7 @@
       }
     }
     a:first-child {
-      img {
+      svg {
         border-radius: 50%;
       }
     }

@@ -1,12 +1,13 @@
 .loginContainer {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: fixed;
-  z-index: 1;
-  height: 570px;
-  width: 800px;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  min-height: 570px;
+  max-width: 800px;
+  width: auto;
   background: #fff;
-  top: 6rem;
-  left: 25%;
   background: linear-gradient(
     to right,
     rgb(228, 227, 227) 0%,
@@ -26,12 +27,10 @@
       cursor: pointer;
       text-align: center;
     }
-    span:hover{
-        background: rgb(202, 193, 193);
+    span:hover {
+      background: rgb(202, 193, 193);
     }
     .selected {
-    //   box-shadow: inset 3px 3px 5px 0 rgba(0, 0, 0, 0.2),
-    //     inset -3px -3px 5px 0 rgba(255, 255, 255, 0.5);
       border-bottom: 3px solid #000;
     }
   }
@@ -41,5 +40,8 @@
   .loginFooter {
     display: flex;
     justify-content: space-around;
+    button{
+      margin: 0 30px;
+    }
   }
 }

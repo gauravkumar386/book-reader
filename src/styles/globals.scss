@@ -13,3 +13,14 @@ body {
   );
   font-family:cursive;
 }
+
+.overlay{
+  position: fixed; /* Positioning and size */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(138, 137, 137, 0.8); /* color */
+  opacity: 0.4;
+  pointer-events: none;
+}

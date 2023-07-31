@@ -1,8 +1,3 @@
-import home from "../public/assets/home.png";
-import discover from "../public/assets/discover.png";
-import recommendations from "../public/assets/recommendations.png";
-import wishlist from "../public/assets/wishlist.png";
-import settings from "../public/assets/settings.png";
 import philospherStone from "../public/assets/philospher_stone.jpg";
 import chamberOfSecrets from "../public/assets/chamber_of_secrets.png";
 import prisonerAzkaban from "../public/assets/prisoner_azkaban.jpg";
@@ -16,30 +11,36 @@ import fellowshipOfRing from "../public/assets/fellowship_of_rings.jpg";
 import theTwoTowers from "../public/assets/the_two_towers.jpg";
 import returnOfKing from "../public/assets/return_of_king.jpg";
 
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+
 export const navigation = [
   {
     title: "Home",
-    src: home,
+    icon: <HomeOutlinedIcon/>,
     link: "/",
   },
   {
     title: "Discover",
-    src: discover,
+    icon: <SearchOutlinedIcon/>,
     link: "/discover",
   },
   {
     title: "My Books",
-    src: recommendations,
+    icon: <LibraryBooksOutlinedIcon/>,
     link: "/mybooks",
   },
   {
     title: "Wishlist",
-    src: wishlist,
+    icon: <FavoriteBorderOutlinedIcon/>,
     link: "/wishlist",
   },
   {
     title: "Settings",
-    src: settings,
+    icon: <SettingsOutlinedIcon/>,
     link: "/settings",
   },
 ];
