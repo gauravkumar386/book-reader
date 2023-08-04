@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,18 +15,21 @@ import TextField from "@mui/material/TextField";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { createPortal } from "react-dom";
+import { MyContext } from "@/shared/MyContext";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const modalContent =
   typeof document !== "undefined" && document.getElementById("modal-root");
 
-const Header = ({ darkMode, setDarkMode }) => {
+const Header = ({ setDarkMode }) => {
   const router = useRouter();
+  const { darkMode, isUserLoggedIn } = useContext(MyContext);
   const state = useSelector((state) => state);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [show, setShow] = useState(false);
   const [pageOffset, setPageOffset] = useState(0);
   const [domReady, setDomReady] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     setDomReady(true);
@@ -39,16 +42,29 @@ const Header = ({ darkMode, setDarkMode }) => {
 
   useEffect(() => {
     const bodyId = document.getElementById("app-root");
-    if(show){
-      bodyId.classList.add("overlay")
-    }else{
-      bodyId.classList.remove("overlay")
+    if (show) {
+      bodyId.classList.add("overlay");
+    } else {
+      bodyId.classList.remove("overlay");
     }
   }, [show]);
 
+  useEffect(() => {
+    const bodyElement = document.getElementById("body");
+    if (darkMode) {
+      bodyElement.classList.add("darkMode");
+    } else {
+      bodyElement.classList.remove("darkMode");
+    }
+  }, [darkMode]);
+
   return (
     <>
-      {domReady && createPortal(show && <LoginComponent setShow={setShow} />, modalContent)}
+      {domReady &&
+        createPortal(
+          show && <LoginComponent setShow={setShow} />,
+          modalContent
+        )}
       <div
         className={`${styles.headerComponent} ${
           pageOffset >= 40 ? styles.showBackground : ""
@@ -97,9 +113,9 @@ const Header = ({ darkMode, setDarkMode }) => {
           {isUserLoggedIn ? (
             <>
               <Link href="/settings">
-                <Image src={profile} width={50} height={50} alt="search" />
+                <AccountCircleIcon/>
               </Link>
-              &nbsp; &nbsp; Alexander Mark
+              &nbsp; &nbsp; {isUserLoggedIn.userName}
             </>
           ) : (
             <CustomButton onClickButton={() => setShow(true)}>

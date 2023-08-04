@@ -10,15 +10,23 @@ import { MyContext } from "@/shared/MyContext";
 const store = createStore(cartReducer);
 const LightModeContext = createContext();
 
+const loggedInUser =
+    typeof localStorage !== "undefined" &&
+    JSON.parse(localStorage.getItem("loggedInUser"));
+
 export default function App({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(null)
+  useEffect(()=>{
+    setIsUserLoggedIn(loggedInUser)
+  },[])
   return (
     <>
       <div id="app-root">
         <Provider store={store}>
-          <MyContext.Provider value={{ darkMode }}>
+          <MyContext.Provider value={{ darkMode, isUserLoggedIn }}>
             <Navbar>
-              <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+              <Header setDarkMode={setDarkMode} />
               <Component {...pageProps} />
             </Navbar>
           </MyContext.Provider>

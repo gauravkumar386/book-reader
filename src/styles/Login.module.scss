@@ -5,6 +5,7 @@
   left: 50vw;
   transform: translate(-50%, -50%);
   min-height: 570px;
+  height: auto;
   max-width: 800px;
   width: auto;
   background: #fff;
@@ -20,6 +21,8 @@
     justify-content: space-around;
     span {
       width: 50%;
+      font-size: 20px;
+      font-weight: 600;
       border-bottom: 1px solid rgb(0, 0, 0, 0.3);
       border-left: 1px solid #ccc;
       padding: 25px 0;
@@ -31,15 +34,26 @@
       background: rgb(202, 193, 193);
     }
     .selected {
-      border-bottom: 3px solid #000;
+      border-bottom: 2px solid #000;
     }
   }
   .loginBody {
-    min-height: 400px;
+    min-height: 380px;
+    form{
+      margin: 5rem 10rem 0 10rem;
+      svg{
+        font-size: 30px;
+        cursor: pointer;
+        position: absolute;
+        top: 15.8rem;
+        right: 10rem;
+      }
+    }
   }
   .loginFooter {
     display: flex;
     justify-content: space-around;
+    margin: 2rem 0;
     button{
       margin: 0 30px;
     }

@@ -1,0 +1,9 @@
+.inputData {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .error {
+    color: rgb(223, 3, 3);
+  }
+}

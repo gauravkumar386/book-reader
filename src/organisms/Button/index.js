@@ -6,7 +6,9 @@ const CustomButton = (props) => {
     minWidth,
     background,
     variant = "contained",
-    onClickButton
+    onClickButton,
+    disabled,
+    type
 } = props;
 
   return (
@@ -18,6 +20,8 @@ const CustomButton = (props) => {
       className={styles.customButton}
       variant={variant}
       onClick={onClickButton}
+      disabled={disabled}
+      type={type}
     >
       {props.children}
     </Button>

@@ -1,11 +1,47 @@
 import CustomButton from "@/organisms/Button";
 import Input from "@/organisms/Input";
 import styles from "@/styles/Login.module.scss";
-import { useEffect, useState } from "react";
+import { Formik } from "formik";
+import { useEffect, useMemo, useState } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Link from "next/link";
 
 const LoginComponent = ({ setShow }) => {
   const [isLoginBody, setIsLoginBody] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(true);
+
+  const loginFooter = useMemo(() => {
+    return (
+      <div
+        className={styles.loginFooter}
+        style={{ margin: isLoginBody ? "5rem 0" : "2rem 0" }}
+      >
+        <CustomButton minWidth={"300px"} onClickButton={() => setShow(false)}>
+          Cancel
+        </CustomButton>
+        {isLoginBody ? (
+          <CustomButton
+            type="submit"
+            // disabled={isSubmitting}
+            minWidth={"300px"}
+          >
+            Login
+          </CustomButton>
+        ) : (
+          <CustomButton
+            type="submit"
+            // disabled={isSubmitting}
+            minWidth={"300px"}
+          >
+            SignUp
+          </CustomButton>
+        )}
+      </div>
+    );
+  }, [isLoginBody, setShow, isSubmitting]);
 
   return (
     <div className={styles.loginContainer}>
@@ -25,18 +61,158 @@ const LoginComponent = ({ setShow }) => {
       </div>
       {isLoginBody ? (
         <div className={styles.loginBody}>
-          <Input label="Email" size="large" />
-          <Input label="Password" type="password" size="large" />
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validate={(values) => {
+              const errors = {};
+              if (!values.email) {
+                errors.email = "Please enter email";
+              } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+              ) {
+                errors.email = "Invalid email address";
+              }
+              if (!values.password) {
+                errors.password = "Please enter password";
+              }
+              if (errors.email || errors.password) {
+                setIsSubmitting(true);
+              } else {
+                setIsSubmitting(false);
+              }
+              return errors;
+            }}
+            onSubmit={(values) => {
+              localStorage.setItem('loggedInUser',JSON.stringify(values))
+              setShow(false);
+              setIsSubmitting(true);
+              window.location.reload();
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <Input label="Email Address" name="email" type="email" />
+                <Input
+                  label="Password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                />
+                {showPassword ? (
+                  <VisibilityIcon onClick={() => setShowPassword(false)} />
+                ) : (
+                  <VisibilityOffIcon onClick={() => setShowPassword(true)} />
+                )}
+                <Link href="/settings">forgot password?</Link>
+                {loginFooter}
+              </form>
+            )}
+          </Formik>
         </div>
       ) : (
-        <div className={styles.loginBody}>SignUp Body</div>
+        <div className={styles.loginBody}>
+          <Formik
+            initialValues={{
+              userName: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            }}
+            validate={(values) => {
+              const errors = {};
+              if (!values.userName) {
+                errors.userName = "Please enter your username";
+              }
+              if (!values.email) {
+                errors.email = "Please enter email";
+              } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+              ) {
+                errors.email = "Invalid email address";
+              }
+              if (!values.password) {
+                errors.password = "Please enter password";
+              }
+              if (
+                !values.confirmPassword ||
+                values.password !== values.confirmPassword
+              ) {
+                errors.confirmPassword = "Password do not match";
+              }
+              if (errors.email || errors.password) {
+                setIsSubmitting(true);
+              } else {
+                setIsSubmitting(false);
+              }
+              return errors;
+            }}
+            onSubmit={(values) => {
+              localStorage.setItem('loggedInUser',JSON.stringify(values))
+              setIsSubmitting(true);
+              setShow(false);
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <form
+                style={{ margin: "1rem 10rem 0 10rem" }}
+                onSubmit={handleSubmit}
+              >
+                <Input label="User Name" name="userName" type="text" />
+                <Input label="Email Address" name="email" type="email" />
+                <Input
+                  label="Password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                />
+                {showPassword ? (
+                  <VisibilityIcon
+                    style={{ top: "17rem" }}
+                    onClick={() => setShowPassword(false)}
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    style={{ top: "17rem" }}
+                    onClick={() => setShowPassword(true)}
+                  />
+                )}
+                <Input
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                />
+                {showConfirmPassword ? (
+                  <VisibilityIcon
+                    style={{ top: "22rem" }}
+                    onClick={() => setShowConfirmPassword(false)}
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    style={{ top: "22rem" }}
+                    onClick={() => setShowConfirmPassword(true)}
+                  />
+                )}
+                <Link href="/settings">forgot password?</Link>
+                {loginFooter}
+              </form>
+            )}
+          </Formik>
+        </div>
       )}
-      <div className={styles.loginFooter}>
-        <CustomButton minWidth={"300px"} onClickButton={() => setShow(false)}>
-          Cancel
-        </CustomButton>
-        <CustomButton minWidth={"300px"}>Submit</CustomButton>
-      </div>
     </div>
   );
 };

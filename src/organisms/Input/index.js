@@ -1,27 +1,24 @@
-import {
-  TextField,
-} from "@mui/material";
+import { TextField } from "@mui/material";
+import { useField } from "formik";
+import styles from "./Input.module.scss";
 
-const Input = (props) => {
-  const {
-    variant = "standard",
-    defaultValue,
-    label,
-    type = "text",
-    size = "normal",
-    value
-  } = props;
+const Input = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+
   return (
-    <TextField
-      required
-      id="standard-required"
-      label={label}
-      type={type}
-      defaultValue={defaultValue}
-      variant={variant}
-      size={size}
-      value={value}
-    />
+    <div className={styles.inputData}>
+      <TextField
+        id="filled-basic"
+        label={label}
+        variant="standard"
+        color="secondary"
+        {...field}
+        {...props}
+      />
+      {meta.touched && meta.error ? (
+        <div className={styles.error}>{meta.error}</div>
+      ) : null}
+    </div>
   );
 };
 
