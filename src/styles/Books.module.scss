@@ -1,0 +1,29 @@
+.booksContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 4rem;
+  margin: 10rem 0;
+  row-gap: 5rem;
+  .bookData {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: min-content;
+    cursor: pointer;
+    align-items: center;
+    text-align: center;
+    img {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    img:hover {
+      transition-duration: 0.2s;
+      transform: scale(1.015);
+      transition-delay: 0.3s;
+    }
+    button, a {
+      width: -webkit-fill-available;
+    }
+  }
+}

@@ -30,19 +30,23 @@
         justify-content: space-between;
         align-items: center;
         .shareDetails {
-          .img {
+          width: 30%;
+          display: flex;
+          justify-content: space-between;
+          span {
+            height: 25px;
             border-radius: 50%;
             overflow: visible;
             padding: 10px;
             background-color: rgb(236, 237, 237);
-            margin-left: 10px;
             transition-duration: 0.3s;
             border: 1px solid #000;
+            cursor: pointer;
           }
           .image{
             cursor: pointer;
           }
-          .image:hover {
+          span:hover {
             transition-duration: 0.3s;
             transition-delay: 0.2s;
             border: 1px solid rgb(202, 193, 193);

@@ -71,24 +71,32 @@
   .booksCarousel {
     background: rgb(239, 242, 245);
     margin: 5rem 0;
+    padding: 3rem 0;
     background: linear-gradient(
       to right,
       rgb(228, 227, 227) 0%,
-      rgb(228, 227, 227) 33%,
-      rgb(239, 242, 245) 33%,
+      rgb(234, 234, 234) 40%,
+      rgb(243, 243, 243) 65%,
       rgb(239, 242, 245) 100%
     );
     .bookContainer {
       display: flex !important;
-      padding: 3rem;
+      justify-content: space-evenly;
+      // padding: 3rem;
       .description {
-        padding: 0 5rem 0 10rem;
-        .title {
-          font-size: 30px;
-          font-weight: 500;
-        }
-        .shortDescription {
-          width: 70%;
+        // padding: 0 5rem 0 10rem;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .descriptionData {
+          .title {
+            font-size: 30px;
+            font-weight: 500;
+          }
+          .shortDescription {
+            width: 70%;
+          }
         }
       }
     }

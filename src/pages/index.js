@@ -3,12 +3,14 @@ import Slider from "react-slick";
 import Link from "next/link";
 import Image from "next/image";
 import { bookList } from "../constants";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import rightArrow from "../../public/assets/right-arrow.png";
 import { Button } from "@mui/material";
 import CustomButton from "@/organisms/Button";
+import { MyContext } from "@/shared/MyContext";
 
 export default function Home() {
+  const { loggedInUsers } = useContext(MyContext);
   const settings = {
     dots: true,
     infinite: true,
@@ -24,7 +26,9 @@ export default function Home() {
     <div className={styles.homeContainer}>
       <div className={styles.upperContainer}>
         <div className={styles.leftContainer}>
-          <div className={styles.title}>Happy Reading, Harvey</div>
+          <div className={styles.title}>
+            Happy Reading, {loggedInUsers ? loggedInUsers.userName : "User"}
+          </div>
           <div className={styles.subtitle}>
             {`Wow! you've delved deep into the wizarding world's secrets. Have Harry's parents died yet?
            Oops, looks like you're not there yet. Get Reading now!`}
@@ -79,11 +83,16 @@ export default function Home() {
                   alt={book.bookTitle}
                 />
                 <div className={styles.description}>
-                  <div className={styles.title}>{book.bookTitle}</div>
-                  <p className={styles.shortDescription}>
-                    {book.shortDescription}
-                  </p>
-                  <p>- {book.author}</p>
+                  <div className={styles.descriptionData}>
+                    <div className={styles.title}>{book.bookTitle}</div>
+                    <p className={styles.shortDescription}>
+                      {book.shortDescription}
+                    </p>
+                    <p>- {book.author}</p>
+                  </div>
+                  <Link href={`/discover/${book.bookId}`}>
+                    <CustomButton>View Book</CustomButton>
+                  </Link>
                 </div>
               </div>
             );

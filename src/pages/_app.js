@@ -16,15 +16,15 @@ const loggedInUser =
 
 export default function App({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(null)
+  const [loggedInUsers, setLoggedInUsers] = useState(null)
   useEffect(()=>{
-    setIsUserLoggedIn(loggedInUser)
+    setLoggedInUsers(loggedInUser)
   },[])
   return (
     <>
       <div id="app-root">
         <Provider store={store}>
-          <MyContext.Provider value={{ darkMode, isUserLoggedIn }}>
+          <MyContext.Provider value={{ darkMode, loggedInUsers }}>
             <Navbar>
               <Header setDarkMode={setDarkMode} />
               <Component {...pageProps} />

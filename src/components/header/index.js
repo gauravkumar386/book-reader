@@ -16,20 +16,26 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { createPortal } from "react-dom";
 import { MyContext } from "@/shared/MyContext";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Logout from "@mui/icons-material/Logout";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import MenuBar from "@/organisms/Menu";
 
 const modalContent =
   typeof document !== "undefined" && document.getElementById("modal-root");
 
 const Header = ({ setDarkMode }) => {
   const router = useRouter();
-  const { darkMode, isUserLoggedIn } = useContext(MyContext);
+  const { darkMode, loggedInUsers } = useContext(MyContext);
   const state = useSelector((state) => state);
   const [searchQuery, setSearchQuery] = useState("");
   const [show, setShow] = useState(false);
   const [pageOffset, setPageOffset] = useState(0);
   const [domReady, setDomReady] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [currentTarget, setCurrentTarget] = useState({
+    targetValue: null,
+    count: 0,
+  });
 
   useEffect(() => {
     setDomReady(true);
@@ -58,6 +64,15 @@ const Header = ({ setDarkMode }) => {
     }
   }, [darkMode]);
 
+  const navigateToProfile = () => {
+    window.location.href = "/settings";
+  };
+
+  const logout = () => {
+    localStorage.removeItem("loggedInUser");
+    window.location.reload();
+  };
+
   return (
     <>
       {domReady &&
@@ -77,6 +92,12 @@ const Header = ({ setDarkMode }) => {
             disableClearable
             sx={{ width: 400 }}
             options={bookList.map((option) => option.bookTitle)}
+            value={searchQuery}
+            onChange={(event,newValue)=>{
+              setSearchQuery(newValue.bookTitle)
+              // const bookId = (bookList.find((x)=>x.bookTitle===newValue))?.bookId
+              // router.push(`/discover/${bookId}`);
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -87,13 +108,13 @@ const Header = ({ setDarkMode }) => {
                 }}
               />
             )}
-            onKeyDown={(event) => {
+            onKeyDown={(event,keyValue) => {
               if (event.key === "Enter") {
                 event.defaultMuiPrevented = true;
                 const book = bookList.find(
                   (x) => x.bookTitle === event.target.value
                 );
-                router.push(`/discover/${book.bookId}`);
+                router.push(`/discover/${book?.bookId}`);
               }
             }}
           />
@@ -110,12 +131,43 @@ const Header = ({ setDarkMode }) => {
               onClick={() => setDarkMode(false)}
             />
           )}
-          {isUserLoggedIn ? (
+          {loggedInUsers ? (
             <>
-              <Link href="/settings">
-                <AccountCircleIcon/>
-              </Link>
-              &nbsp; &nbsp; {isUserLoggedIn.userName}
+              <div
+                onClick={(event) =>
+                  setCurrentTarget({
+                    ...currentTarget,
+                    count: currentTarget.count + 1,
+                    targetValue: event.currentTarget,
+                  })
+                }
+                className={styles.profileDetails}
+              >
+                <AccountCircleIcon />
+                &nbsp;{loggedInUsers.userName}
+              </div>
+              <MenuBar
+                currentTarget={currentTarget}
+                menuItem={[
+                  {
+                    name: "Profile",
+                    icon: <AccountCircleIcon />,
+                    onClickData: navigateToProfile,
+                  },
+                  {
+                    name: "Settings",
+                    icon: <SettingsOutlinedIcon />,
+                    onClickData: navigateToProfile,
+                  },
+                  {
+                    name: "Logout",
+                    icon: <Logout />,
+                    onClickData: logout,
+                  },
+                ]}
+              >
+                Menu Bar
+              </MenuBar>
             </>
           ) : (
             <CustomButton onClickButton={() => setShow(true)}>

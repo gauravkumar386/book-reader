@@ -7,9 +7,9 @@ import rupee from "../../../public/assets/rupee.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem } from "@/redux/action/cartAction";
 import CustomButton from "@/organisms/Button";
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 const BookDetails = () => {
   const route = useRouter();
@@ -35,6 +35,28 @@ const BookDetails = () => {
     setBookDetails(bookDetail);
   }, [bookId, myBookList]);
 
+  const saveBook = () => {
+    const savedBookList =
+      JSON.parse(localStorage.getItem("savedBooks")) || [];
+    console.log("book-list", savedBookList);
+    if (savedBookList.length > 0) {
+      if (savedBookList.includes(bookId)) {
+        savedBookList.splice(savedBookList.indexOf(bookId), 1);
+        localStorage.setItem("savedBooks", JSON.stringify([...savedBookList]));
+      } else {
+        localStorage.setItem(
+          "savedBooks",
+          JSON.stringify([...savedBookList, bookId])
+        );
+      }
+    } else {
+      localStorage.setItem(
+        "savedBooks",
+        JSON.stringify([...savedBookList, bookId])
+      );
+    }
+  };
+
   return (
     <div className={styles.bookDetailsContainer}>
       <div className={styles.upperContainer}>
@@ -57,23 +79,31 @@ const BookDetails = () => {
             {isPurchased ? (
               <CustomButton>View Book</CustomButton>
             ) : isBookAddedToCart ? (
-              <CustomButton onClickButton={() => {
-                dispatch(deleteItem(bookDetails?.bookId));
-              }}>Remove from cart</CustomButton>
+              <CustomButton
+                onClickButton={() => {
+                  dispatch(deleteItem(bookDetails?.bookId));
+                }}
+              >
+                Remove from cart
+              </CustomButton>
             ) : (
-              <CustomButton onClickButton={() => {
-                dispatch(addItem(bookDetails));
-              }}>Add to cart</CustomButton>
+              <CustomButton
+                onClickButton={() => {
+                  dispatch(addItem(bookDetails));
+                }}
+              >
+                Add to cart
+              </CustomButton>
             )}
             <div className={styles.shareDetails}>
               <span>
-                <BookmarkBorderOutlinedIcon/>
+                <BookmarkBorderOutlinedIcon onClick={saveBook} />
               </span>
               <span>
-              <ShareOutlinedIcon/>
+                <ShareOutlinedIcon />
               </span>
               <span>
-                <FileDownloadOutlinedIcon/>
+                <FileDownloadOutlinedIcon />
               </span>
             </div>
           </div>
