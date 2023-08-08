@@ -1,10 +1,20 @@
 .booksContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  column-gap: 4rem;
+  flex-direction: column;
   margin: 10rem 0;
-  row-gap: 5rem;
+  .selectContainer{
+    display: flex;
+    justify-content: flex-end;
+    gap: 60px;
+  }
+  .bookList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 4rem;
+    row-gap: 5rem;
+    margin-top: 2rem;
+  }
   .bookData {
     display: flex;
     flex-direction: column;
@@ -22,7 +32,8 @@
       transform: scale(1.015);
       transition-delay: 0.3s;
     }
-    button, a {
+    button,
+    a {
       width: -webkit-fill-available;
     }
   }

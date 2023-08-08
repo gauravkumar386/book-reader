@@ -97,7 +97,7 @@ export const bookList = [
     shortDescription: "Galloping gargoyles … 2022 is the silver anniversary of J.K. Rowling's magical classic Harry Potter and the Philosopher's Stone!",
     description: "The boy wizard Harry Potter has been casting a spell over young readers and their families ever since 1997. Now the first book in this unmissable series celebrates 25 years in print! The paperback edition of the tale that introduced us to Harry, Ron and Hermione has been updated and dressed in silver to mark the occasion. It's time to take the magical journey of a lifetime …",
     editors: ["J K Rowling", "Christopher Reath","Alena Gestabon","Steve Korg"],
-    language: "English",
+    language: "French",
     paperback: "pdf, full color, 345 pages",
     reviews:[
       {
@@ -148,7 +148,7 @@ export const bookList = [
     description: `In ancient times the Rings of Power were crafted by the Elven-smiths, and Sauron, the Dark Lord, forged the One Ring, 
       filling it with his own power so that he could rule all others. But the One Ring was taken from him, and though he sought it throughout Middle-earth, it remained lost to him.`,
       editors: ["J R R Tolkien", "Christopher Reath","Ken Liu"],
-    language: "English",
+    language: "German",
     paperback: "pdf, full color, 450 pages",
     reviews:[
       {
