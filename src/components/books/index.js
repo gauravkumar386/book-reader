@@ -101,7 +101,7 @@ const Books = (props) => {
   }, [cartItems, dispatch, myBookList, sortBy]);
 
   return (
-    <div className={styles.booksContainer}>
+    <div className={styles.booksContainer} id="bookListDiv">
       <div className={styles.selectContainer}>
         <SelectCheckbox
           label={"Filter By:"}

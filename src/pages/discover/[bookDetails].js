@@ -38,7 +38,6 @@ const BookDetails = () => {
   const saveBook = () => {
     const savedBookList =
       JSON.parse(localStorage.getItem("savedBooks")) || [];
-    console.log("book-list", savedBookList);
     if (savedBookList.length > 0) {
       if (savedBookList.includes(bookId)) {
         savedBookList.splice(savedBookList.indexOf(bookId), 1);

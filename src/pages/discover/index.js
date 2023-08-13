@@ -9,7 +9,7 @@ import CustomButton from "@/organisms/Button";
 import Books from "@/components/books";
 import dynamic from "next/dynamic";
 
-const DynamicBookList = dynamic(()=> import('../../components/books'))
+const DynamicBookList = dynamic(() => import("../../components/books"));
 
 const Discover = () => {
   const [sliderRef, setSliderRef] = useState(null);
@@ -26,7 +26,6 @@ const Discover = () => {
     autoplaySpeed: 4000,
   };
 
-  console.log("book", bookList);
   return (
     <div className={styles.discoverComponent}>
       <div className={styles.title}>Keep the story going...</div>
@@ -35,7 +34,18 @@ const Discover = () => {
           "Don't let the story end just yet. Continue reading your last book and immerse yourself in the world of literature."
         }
       </div>
-      <Link href="/discover">
+      <Link
+        href="/discover"
+        onClick={(e) => {
+          let bookListDiv = document.getElementById("bookListDiv");
+          e.preventDefault();
+          bookListDiv &&
+            window.scrollTo({
+              top: bookListDiv.offsetTop - 120,
+              behavior: "smooth",
+            });
+        }}
+      >
         <CustomButton>{"Start Reading ->"}</CustomButton>
       </Link>
       <div>
