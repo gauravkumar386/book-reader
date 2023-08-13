@@ -22,8 +22,7 @@ const MenuProps = {
 };
 
 const SelectCheckbox = (props) => {
-  const { label, filterList = [] } = props;
-  const [filterValues, setFilterValues] = useState([]);
+  const { label, filterList = [], filterValues, setFilterValues } = props;
 
   const handleChange = (value, label) => {
     const clickedObject = filterValues.find((x) => x.label === label);
@@ -66,6 +65,9 @@ const SelectCheckbox = (props) => {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
+          <MenuItem disabled value="">
+            <em>Filter By:</em>
+          </MenuItem>
           {filterList.map((data, index) => {
             return (
               <>

@@ -20,7 +20,14 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "10rem",
+          }}
+        >
           <h2>Oops, something went wrong!</h2>
           <CustomButton
             onClickButton={() => this.setState({ hasError: false })}

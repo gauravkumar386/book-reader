@@ -7,7 +7,7 @@ const SelectLabels = (props) => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    setSortBy(event.target.value)
+    setSortBy(event.target.value);
   };
 
   return (
@@ -20,6 +20,9 @@ const SelectLabels = (props) => {
         label={label}
         onChange={handleChange}
       >
+        <MenuItem value="">
+          <em>Sort By:</em>
+        </MenuItem>
         {selectList.map((data, index) => {
           return (
             <MenuItem key={index} value={data.valueId}>

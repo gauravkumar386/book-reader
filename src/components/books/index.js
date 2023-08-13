@@ -9,12 +9,14 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import SelectLabels from "@/organisms/Select";
 import SelectCheckbox from "@/organisms/SelectCheckbox";
+import { FILTER_LIST, SORT_LIST } from "@/constants";
 
 const Books = (props) => {
   const { bookList = [] } = props;
   const cartItems = useSelector((state) => state.cartItems);
   const [myBookList, setMyBookList] = useState([]);
   const [sortBy, setSortBy] = useState("");
+  const [filterValues, setFilterValues] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,18 +26,6 @@ const Books = (props) => {
       setMyBookList(JSON.parse(localStorage.getItem("myBooks")));
     }
   }, []);
-
-  // useEffect(() => {
-  //   console.log("sotBy", sortBy);
-  //   if (sortBy === "price_high_low") {
-  //     const sortedList = myBookList.sort((a, b) => a.bookPrice - b.bookPrice);
-  //     setMyBookList(sortedList);
-  //   } else if (sortBy === "price_low_high") {
-  //     const sortedList = myBookList.sort((a, b) => b.bookPrice - a.bookPrice);
-  //     setMyBookList(sortedList);
-  //   }
-  // }, [sortBy, myBookList]);
-
 
   const BookListData = useMemo(() => {
     return (
@@ -48,7 +38,30 @@ const Books = (props) => {
                 : sortBy === "price_high_low"
                 ? b.bookPrice - a.bookPrice
                 : ""
-            ).map((data, index) => {
+            )
+            .filter((x) => {
+              if (
+                filterValues.reduce((r, e) => (r.push(...e.values), r), [])
+                  .length > 0
+              ) {
+                const flagArray = [];
+                for (let item of filterValues) {
+                  if (
+                    x[`${item.label}`] !== undefined &&
+                    item.values.length > 0
+                  ) {
+                    flagArray.push(item.values.includes(x[`${item.label}`]));
+                  }
+                }
+                if (flagArray.includes(false)) {
+                  return false;
+                }
+                return true;
+              } else {
+                return true;
+              }
+            })
+            .map((data, index) => {
               return (
                 <SimplePaper key={index} styles={{ marginBottom: "30px" }}>
                   <div className={styles.bookData}>
@@ -98,31 +111,20 @@ const Books = (props) => {
             })}
       </div>
     );
-  }, [cartItems, dispatch, myBookList, sortBy]);
+  }, [cartItems, dispatch, myBookList, sortBy, filterValues]);
 
   return (
     <div className={styles.booksContainer} id="bookListDiv">
       <div className={styles.selectContainer}>
         <SelectCheckbox
           label={"Filter By:"}
-          filterList={[
-            {
-              label: "Author",
-              values: ["J K Rowling", "J R R Tolkien"],
-            },
-            {
-              label: "Language",
-              values: ["English", "French", "German"],
-            },
-          ]}
+          filterList={FILTER_LIST}
+          filterValues={filterValues}
+          setFilterValues={setFilterValues}
         />
         <SelectLabels
           label={"Sort By:"}
-          selectList={[
-            { valueId: "price_low_high", value: "Price: Low to High" },
-            { valueId: "price_high_low", value: "Price: High to Low" },
-            { valueId: "ratings", value: "Ratings" },
-          ]}
+          selectList={SORT_LIST}
           setSortBy={setSortBy}
         />
       </div>

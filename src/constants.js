@@ -193,7 +193,7 @@ export const bookList = [
     shortDescription: "Galloping gargoyles … 2022 is the silver anniversary of J.K. Rowling's magical classic Harry Potter and the Philosopher's Stone!",
     description: "The boy wizard Harry Potter has been casting a spell over young readers and their families ever since 1997. Now the first book in this unmissable series celebrates 25 years in print! The paperback edition of the tale that introduced us to Harry, Ron and Hermione has been updated and dressed in silver to mark the occasion. It's time to take the magical journey of a lifetime …",
     editors: ["J K Rowling", "Christopher Reath","Alena Gestabon","Steve Korg"],
-    language: "English",
+    language: "French",
     paperback: "pdf, full color, 345 pages",
     reviews:[
       {
@@ -274,4 +274,21 @@ export const bookList = [
       }
     ]
   },
+];
+
+export const FILTER_LIST = [
+  {
+    label: "author",
+    values: ["J K Rowling", "J R R Tolkien"],
+  },
+  {
+    label: "language",
+    values: ["English", "French", "German"],
+  },
+];
+
+export const SORT_LIST = [
+  { valueId: "price_low_high", value: "Price: Low to High" },
+  { valueId: "price_high_low", value: "Price: High to Low" },
+  { valueId: "ratings", value: "Ratings" },
 ];
