@@ -6,20 +6,21 @@ import "@/styles/globals.scss";
 import cartReducer from "@/redux/reducer/cartReducer";
 import { createContext, useEffect, useState } from "react";
 import { MyContext } from "@/shared/MyContext";
+import ErrorBoundary from "@/shared/errorBoundary";
 
 const store = createStore(cartReducer);
 const LightModeContext = createContext();
 
 const loggedInUser =
-    typeof localStorage !== "undefined" &&
-    JSON.parse(localStorage.getItem("loggedInUser"));
+  typeof localStorage !== "undefined" &&
+  JSON.parse(localStorage.getItem("loggedInUser"));
 
 export default function App({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(false);
-  const [loggedInUsers, setLoggedInUsers] = useState(null)
-  useEffect(()=>{
-    setLoggedInUsers(loggedInUser)
-  },[])
+  const [loggedInUsers, setLoggedInUsers] = useState(null);
+  useEffect(() => {
+    setLoggedInUsers(loggedInUser);
+  }, []);
   return (
     <>
       <div id="app-root">
@@ -27,7 +28,9 @@ export default function App({ Component, pageProps }) {
           <MyContext.Provider value={{ darkMode, loggedInUsers }}>
             <Navbar>
               <Header setDarkMode={setDarkMode} />
-              <Component {...pageProps} />
+              <ErrorBoundary>
+                <Component {...pageProps} />
+              </ErrorBoundary>
             </Navbar>
           </MyContext.Provider>
         </Provider>

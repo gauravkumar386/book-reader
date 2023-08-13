@@ -7,6 +7,9 @@ import rightArrow from "../../../public/assets/right-arrow.png";
 import styles from "@/styles/Discover.module.scss";
 import CustomButton from "@/organisms/Button";
 import Books from "@/components/books";
+import dynamic from "next/dynamic";
+
+const DynamicBookList = dynamic(()=> import('../../components/books'))
 
 const Discover = () => {
   const [sliderRef, setSliderRef] = useState(null);
@@ -71,7 +74,7 @@ const Discover = () => {
           })}
         </Slider>
       </div>
-      <Books bookList={bookList} />
+      <DynamicBookList bookList={bookList} />
     </div>
   );
 };
