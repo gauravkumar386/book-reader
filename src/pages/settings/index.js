@@ -1,6 +1,13 @@
+import SimpleBreadcrumbs from "@/organisms/Breadcrumbs";
+import { useEffect } from "react";
+
 const Settings = () => {
-    return <>Settings</>;
-  };
-  
-  export default Settings;
-  
+  return (
+    <>
+      <SimpleBreadcrumbs />
+      Settings
+    </>
+  );
+};
+
+export default Settings;

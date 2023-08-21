@@ -37,4 +37,13 @@
       width: -webkit-fill-available;
     }
   }
+  .noBooksFound{
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 25px;
+  }
 }

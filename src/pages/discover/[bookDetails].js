@@ -10,6 +10,8 @@ import CustomButton from "@/organisms/Button";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import GoToTop from "@/organisms/GoToTop";
+import SimpleBreadcrumbs from "@/organisms/Breadcrumbs";
 
 const BookDetails = () => {
   const route = useRouter();
@@ -31,7 +33,7 @@ const BookDetails = () => {
 
   useEffect(() => {
     const bookDetail = bookList.find((book) => book.bookId === bookId);
-    setIsPurchased(myBookList.some((x) => x.bookId === bookDetail?.bookId));
+    setIsPurchased(myBookList && myBookList.some((x) => x.bookId === bookDetail?.bookId));
     setBookDetails(bookDetail);
   }, [bookId, myBookList]);
 
@@ -58,6 +60,7 @@ const BookDetails = () => {
 
   return (
     <div className={styles.bookDetailsContainer}>
+      <SimpleBreadcrumbs/>
       <div className={styles.upperContainer}>
         <Image
           className={styles.cover}
@@ -156,6 +159,7 @@ const BookDetails = () => {
           </div>
         </div>
       </div>
+      <GoToTop/>
     </div>
   );
 };

@@ -1,0 +1,36 @@
+.footerBody{
+    min-height: 250px;
+    background: rgb(222, 216, 216);
+    margin-top: 20rem;
+    .socialLinks{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 3rem 0 2rem 0;
+        svg{
+            cursor: pointer;
+            height: 2rem;
+            width: 2rem;
+            color: #fff;
+            background: #000;
+            border-radius: 50%;
+            padding: 7px;
+            overflow: hidden;
+        }
+    }
+    .infoLinks{
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        padding-bottom: 0.5rem;
+        a{
+            text-decoration: none;
+            color: #000;
+            font-size: 15px;
+        }
+    }
+    .copyright{
+        @extend .infoLinks;
+        gap: 0;
+    }
+}

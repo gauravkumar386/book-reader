@@ -8,6 +8,7 @@ import emptyCart from "../../../public/assets/box.png";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CustomButton from "@/organisms/Button";
+import SimpleBreadcrumbs from "@/organisms/Breadcrumbs";
 
 const Cart = () => {
   const state = useSelector((state) => state);
@@ -30,6 +31,7 @@ const Cart = () => {
 
   return (
     <>
+      <SimpleBreadcrumbs/>
       {state.cartItems.length > 0 ? (
         <div className={styles.cartContainer}>
           <div className={styles.cartLabel}>
@@ -76,9 +78,7 @@ const Cart = () => {
             <Link href="/discover">
               <CustomButton>Continue Browsing</CustomButton>
             </Link>
-            <CustomButton onClickButton={checkoutItem}>
-              Checkout
-            </CustomButton>
+            <CustomButton onClickButton={checkoutItem}>Checkout</CustomButton>
           </div>
         </div>
       ) : (

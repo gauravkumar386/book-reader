@@ -15,7 +15,9 @@ const CustomButton = (props) => {
     <Button
       style={{
         background,
-        minWidth
+        minWidth,
+        color: disabled && "#000",
+        opacity: disabled && "0.5"
       }}
       className={styles.customButton}
       variant={variant}

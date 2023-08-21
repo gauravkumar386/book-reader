@@ -7,6 +7,7 @@ import cartReducer from "@/redux/reducer/cartReducer";
 import { createContext, useEffect, useState } from "react";
 import { MyContext } from "@/shared/MyContext";
 import ErrorBoundary from "@/shared/errorBoundary";
+import Footer from "@/components/footer";
 
 const store = createStore(cartReducer);
 const LightModeContext = createContext();
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }) {
               <ErrorBoundary>
                 <Component {...pageProps} />
               </ErrorBoundary>
+              <Footer />
             </Navbar>
           </MyContext.Provider>
         </Provider>

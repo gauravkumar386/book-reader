@@ -20,7 +20,7 @@ const Books = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (bookList.length > 0) {
+    if (bookList?.length > 0) {
       setMyBookList(bookList);
     } else {
       setMyBookList(JSON.parse(localStorage.getItem("myBooks")));
@@ -30,7 +30,8 @@ const Books = (props) => {
   const BookListData = useMemo(() => {
     return (
       <div className={styles.bookList}>
-        {myBookList.length > 0 &&
+        {myBookList ? (
+          myBookList.length > 0 &&
           myBookList
             .sort((a, b) =>
               sortBy === "price_low_high"
@@ -108,25 +109,43 @@ const Books = (props) => {
                   </div>
                 </SimplePaper>
               );
-            })}
+            })
+        ) : (
+          <div className={styles.noBooksFound}>
+            Uh Oh! No Books Found
+            <Link href="/discover">Go to Discover</Link>
+          </div>
+        )}
       </div>
     );
   }, [cartItems, dispatch, myBookList, sortBy, filterValues]);
 
+  const SelectCheck = useMemo(() => {
+    return (
+      <SelectCheckbox
+        label={"Filter By:"}
+        filterList={FILTER_LIST}
+        filterValues={filterValues}
+        setFilterValues={setFilterValues}
+      />
+    );
+  }, [filterValues]);
+
+  const SelectLabel = useMemo(() => {
+    return (
+      <SelectLabels
+        label={"Sort By:"}
+        selectList={SORT_LIST}
+        setSortBy={setSortBy}
+      />
+    );
+  }, []);
+
   return (
     <div className={styles.booksContainer} id="bookListDiv">
       <div className={styles.selectContainer}>
-        <SelectCheckbox
-          label={"Filter By:"}
-          filterList={FILTER_LIST}
-          filterValues={filterValues}
-          setFilterValues={setFilterValues}
-        />
-        <SelectLabels
-          label={"Sort By:"}
-          selectList={SORT_LIST}
-          setSortBy={setSortBy}
-        />
+        {SelectCheck}
+        {SelectLabel}
       </div>
       {BookListData}
     </div>

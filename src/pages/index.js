@@ -8,6 +8,7 @@ import rightArrow from "../../public/assets/right-arrow.png";
 import { Button } from "@mui/material";
 import CustomButton from "@/organisms/Button";
 import { MyContext } from "@/shared/MyContext";
+import GoToTop from "@/organisms/GoToTop";
 
 export default function Home() {
   const { loggedInUsers } = useContext(MyContext);
@@ -125,6 +126,7 @@ export default function Home() {
           })}
         </div>
       </div> */}
+      <GoToTop/>
     </div>
   );
 }

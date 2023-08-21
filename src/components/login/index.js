@@ -17,7 +17,6 @@ const LoginComponent = ({ setShow }) => {
     return (
       <div
         className={styles.loginFooter}
-        style={{ margin: isLoginBody ? "5rem 0" : "2rem 0" }}
       >
         <CustomButton minWidth={"300px"} onClickButton={() => setShow(false)}>
           Cancel
@@ -25,7 +24,7 @@ const LoginComponent = ({ setShow }) => {
         {isLoginBody ? (
           <CustomButton
             type="submit"
-            // disabled={isSubmitting}
+            disabled={isSubmitting}
             minWidth={"300px"}
           >
             Login
@@ -33,7 +32,7 @@ const LoginComponent = ({ setShow }) => {
         ) : (
           <CustomButton
             type="submit"
-            // disabled={isSubmitting}
+            disabled={isSubmitting}
             minWidth={"300px"}
           >
             SignUp
@@ -206,7 +205,6 @@ const LoginComponent = ({ setShow }) => {
                     onClick={() => setShowConfirmPassword(true)}
                   />
                 )}
-                <Link href="/settings">forgot password?</Link>
                 {loginFooter}
               </form>
             )}

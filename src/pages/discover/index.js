@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import rightArrow from "../../../public/assets/right-arrow.png";
 import styles from "@/styles/Discover.module.scss";
 import CustomButton from "@/organisms/Button";
-import Books from "@/components/books";
 import dynamic from "next/dynamic";
+import GoToTop from "@/organisms/GoToTop";
+import SimpleBreadcrumbs from "@/organisms/Breadcrumbs";
 
 const DynamicBookList = dynamic(() => import("../../components/books"));
 
@@ -28,6 +29,7 @@ const Discover = () => {
 
   return (
     <div className={styles.discoverComponent}>
+      <SimpleBreadcrumbs/>
       <div className={styles.title}>Keep the story going...</div>
       <div className={styles.subtitle}>
         {
@@ -85,6 +87,7 @@ const Discover = () => {
         </Slider>
       </div>
       <DynamicBookList bookList={bookList} />
+      <GoToTop />
     </div>
   );
 };

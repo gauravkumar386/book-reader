@@ -8,6 +8,7 @@ import {
   OutlinedInput,
   Select,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 
 const ITEM_HEIGHT = 48;
@@ -65,8 +66,18 @@ const SelectCheckbox = (props) => {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          <MenuItem disabled value="">
-            <em>Filter By:</em>
+          <MenuItem
+            value=""
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              color: "rgba(255,0,0)",
+              padding: "15px 20px"
+            }}
+            onClick={() => setFilterValues([])}
+          >
+            <em>Clear Filter</em>
+            <CloseIcon />
           </MenuItem>
           {filterList.map((data, index) => {
             return (

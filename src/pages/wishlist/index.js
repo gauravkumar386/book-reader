@@ -1,6 +1,12 @@
+import SimpleBreadcrumbs from "@/organisms/Breadcrumbs";
+
 const Wishlist = () => {
-    return <>Wishlist</>;
-  };
-  
-  export default Wishlist;
-  
+  return (
+    <>
+      <SimpleBreadcrumbs />
+      Wishlist
+    </>
+  );
+};
+
+export default Wishlist;
