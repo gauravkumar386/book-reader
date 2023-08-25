@@ -12,6 +12,7 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import GoToTop from "@/organisms/GoToTop";
 import SimpleBreadcrumbs from "@/organisms/Breadcrumbs";
+import SimpleBackdrop from "@/organisms/Backdrop";
 
 const BookDetails = () => {
   const route = useRouter();
@@ -33,13 +34,17 @@ const BookDetails = () => {
 
   useEffect(() => {
     const bookDetail = bookList.find((book) => book.bookId === bookId);
-    setIsPurchased(myBookList && myBookList.some((x) => x.bookId === bookDetail?.bookId));
+    if(bookDetail===undefined){
+      route.push('/404')
+    }
+    setIsPurchased(
+      myBookList && myBookList.some((x) => x.bookId === bookDetail?.bookId)
+    );
     setBookDetails(bookDetail);
-  }, [bookId, myBookList]);
+  }, [bookId, myBookList, route]);
 
   const saveBook = () => {
-    const savedBookList =
-      JSON.parse(localStorage.getItem("savedBooks")) || [];
+    const savedBookList = JSON.parse(localStorage.getItem("savedBooks")) || [];
     if (savedBookList.length > 0) {
       if (savedBookList.includes(bookId)) {
         savedBookList.splice(savedBookList.indexOf(bookId), 1);
@@ -59,108 +64,114 @@ const BookDetails = () => {
   };
 
   return (
-    <div className={styles.bookDetailsContainer}>
-      <SimpleBreadcrumbs/>
-      <div className={styles.upperContainer}>
-        <Image
-          className={styles.cover}
-          src={bookDetails?.bookCover}
-          width={275}
-          height={400}
-          alt={bookDetails?.bookTitle}
-        />
-        <div className={styles.upperRight}>
-          <p>{bookDetails?.bookTitle}</p>
-          <p> - {bookDetails?.author}</p>
-          <p>{bookDetails?.shortDescription}</p>
-          <p>
-            <Image src={rupee} width={20} height={20} alt="currency" />
-            {bookDetails?.bookPrice}
-          </p>
-          <div className={styles.buttonContainer}>
-            {isPurchased ? (
-              <CustomButton>View Book</CustomButton>
-            ) : isBookAddedToCart ? (
-              <CustomButton
-                onClickButton={() => {
-                  dispatch(deleteItem(bookDetails?.bookId));
-                }}
-              >
-                Remove from cart
-              </CustomButton>
-            ) : (
-              <CustomButton
-                onClickButton={() => {
-                  dispatch(addItem(bookDetails));
-                }}
-              >
-                Add to cart
-              </CustomButton>
-            )}
-            <div className={styles.shareDetails}>
-              <span>
-                <BookmarkBorderOutlinedIcon onClick={saveBook} />
-              </span>
-              <span>
-                <ShareOutlinedIcon />
-              </span>
-              <span>
-                <FileDownloadOutlinedIcon />
-              </span>
+    <>
+      {bookDetails === undefined ? (
+        <SimpleBackdrop backdropOpen={true} />
+      ) : (
+        <div className={styles.bookDetailsContainer}>
+          <SimpleBreadcrumbs />
+          <div className={styles.upperContainer}>
+            <Image
+              className={styles.cover}
+              src={bookDetails?.bookCover}
+              width={275}
+              height={400}
+              alt={bookDetails?.bookTitle}
+            />
+            <div className={styles.upperRight}>
+              <p>{bookDetails?.bookTitle}</p>
+              <p> - {bookDetails?.author}</p>
+              <p>{bookDetails?.shortDescription}</p>
+              <p>
+                <Image src={rupee} width={20} height={20} alt="currency" />
+                {bookDetails?.bookPrice}
+              </p>
+              <div className={styles.buttonContainer}>
+                {isPurchased ? (
+                  <CustomButton>View Book</CustomButton>
+                ) : isBookAddedToCart ? (
+                  <CustomButton
+                    onClickButton={() => {
+                      dispatch(deleteItem(bookDetails?.bookId));
+                    }}
+                  >
+                    Remove from cart
+                  </CustomButton>
+                ) : (
+                  <CustomButton
+                    onClickButton={() => {
+                      dispatch(addItem(bookDetails));
+                    }}
+                  >
+                    Add to cart
+                  </CustomButton>
+                )}
+                <div className={styles.shareDetails}>
+                  <span>
+                    <BookmarkBorderOutlinedIcon onClick={saveBook} />
+                  </span>
+                  <span>
+                    <ShareOutlinedIcon />
+                  </span>
+                  <span>
+                    <FileDownloadOutlinedIcon />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
+          <div className={styles.lowerContainer}>
+            <div className={styles.lowerLeft}>
+              <div className={styles.descriptionData}>
+                <p>Description</p>
+                <p>{bookDetails?.description}</p>
+              </div>
+              <div className={styles.reviewList}>
+                {bookDetails?.reviews.map((user, index) => {
+                  return (
+                    <div key={index} className={styles.reviewBody}>
+                      <Image
+                        src={user.userImage}
+                        width={70}
+                        height={70}
+                        alt="user"
+                      />
+                      <div className={styles.description}>
+                        <p>{user.userName}</p>
+                        <p>{user.comments}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className={styles.lowerRight}>
+              <div className={styles.editors}>
+                <p>Editors</p>
+                {bookDetails?.editors?.map((book, index) => {
+                  return (
+                    <>
+                      {" "}
+                      {book}
+                      {index !== bookDetails.editors.length - 1 && ","}
+                    </>
+                  );
+                })}
+              </div>
+              <div className={styles.language}>
+                <p>Language</p>
+                <p>{bookDetails?.language}</p>
+              </div>
+              <div className={styles.paperback}>
+                <p>Paperback</p>
+                <p>{bookDetails?.paperback}</p>
+              </div>
+            </div>
+          </div>
+          <GoToTop />
         </div>
-      </div>
-      <div className={styles.lowerContainer}>
-        <div className={styles.lowerLeft}>
-          <div className={styles.descriptionData}>
-            <p>Description</p>
-            <p>{bookDetails?.description}</p>
-          </div>
-          <div className={styles.reviewList}>
-            {bookDetails?.reviews.map((user, index) => {
-              return (
-                <div key={index} className={styles.reviewBody}>
-                  <Image
-                    src={user.userImage}
-                    width={70}
-                    height={70}
-                    alt="user"
-                  />
-                  <div className={styles.description}>
-                    <p>{user.userName}</p>
-                    <p>{user.comments}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className={styles.lowerRight}>
-          <div className={styles.editors}>
-            <p>Editors</p>
-            {bookDetails?.editors?.map((book, index) => {
-              return (
-                <>
-                  {" "}
-                  {book}
-                  {index !== bookDetails.editors.length - 1 && ","}
-                </>
-              );
-            })}
-          </div>
-          <div className={styles.language}>
-            <p>Language</p>
-            <p>{bookDetails?.language}</p>
-          </div>
-          <div className={styles.paperback}>
-            <p>Paperback</p>
-            <p>{bookDetails?.paperback}</p>
-          </div>
-        </div>
-      </div>
-      <GoToTop/>
-    </div>
+      )}
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import SelectLabels from "@/organisms/Select";
 import SelectCheckbox from "@/organisms/SelectCheckbox";
 import { FILTER_LIST, SORT_LIST } from "@/constants";
+import CloseIcon from '@mui/icons-material/Close';
 
 const Books = (props) => {
   const { bookList = [] } = props;
@@ -28,92 +29,101 @@ const Books = (props) => {
   }, []);
 
   const BookListData = useMemo(() => {
+    const filterList = myBookList
+      ? myBookList.length > 0 &&
+        myBookList
+          .sort((a, b) =>
+            sortBy === "price_low_high"
+              ? a.bookPrice - b.bookPrice
+              : sortBy === "price_high_low"
+              ? b.bookPrice - a.bookPrice
+              : ""
+          )
+          .filter((x) => {
+            if (
+              filterValues.reduce((r, e) => (r.push(...e.values), r), [])
+                .length > 0
+            ) {
+              const flagArray = [];
+              for (let item of filterValues) {
+                if (
+                  x[`${item.label}`] !== undefined &&
+                  item.values.length > 0
+                ) {
+                  flagArray.push(item.values.includes(x[`${item.label}`]));
+                }
+              }
+              if (flagArray.includes(false)) {
+                return false;
+              }
+              return true;
+            } else {
+              return true;
+            }
+          })
+      : "";
     return (
       <div className={styles.bookList}>
-        {myBookList ? (
-          myBookList.length > 0 &&
-          myBookList
-            .sort((a, b) =>
-              sortBy === "price_low_high"
-                ? a.bookPrice - b.bookPrice
-                : sortBy === "price_high_low"
-                ? b.bookPrice - a.bookPrice
-                : ""
-            )
-            .filter((x) => {
-              if (
-                filterValues.reduce((r, e) => (r.push(...e.values), r), [])
-                  .length > 0
-              ) {
-                const flagArray = [];
-                for (let item of filterValues) {
-                  if (
-                    x[`${item.label}`] !== undefined &&
-                    item.values.length > 0
-                  ) {
-                    flagArray.push(item.values.includes(x[`${item.label}`]));
-                  }
-                }
-                if (flagArray.includes(false)) {
-                  return false;
-                }
-                return true;
-              } else {
-                return true;
-              }
-            })
-            .map((data, index) => {
-              return (
-                <SimplePaper key={index} styles={{ marginBottom: "30px" }}>
-                  <div className={styles.bookData}>
+        {filterList && filterList.length > 0 ? (
+          filterList.map((data, index) => {
+            return (
+              <SimplePaper key={index} styles={{ marginBottom: "30px" }}>
+                <div className={styles.bookData}>
+                  <Link href={`/discover/${data.bookId}`}>
+                    <Image
+                      src={data.bookCover}
+                      width={200}
+                      height={300}
+                      alt={data.bookTitle}
+                    />
+                  </Link>
+                  <p>{data.bookTitle}</p>
+                  <p
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginTop: "0",
+                    }}
+                  >
+                    <CurrencyRupeeIcon style={{ width: "20px" }} />
+                    {data.bookPrice}
+                  </p>
+                  {myBookList.some((x) => x.bookId === data.bookId) ? (
                     <Link href={`/discover/${data.bookId}`}>
-                      <Image
-                        src={data.bookCover}
-                        width={200}
-                        height={300}
-                        alt={data.bookTitle}
-                      />
+                      <CustomButton>View Book</CustomButton>
                     </Link>
-                    <p>{data.bookTitle}</p>
-                    <p
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginTop: "0",
+                  ) : cartItems.some((x) => x.bookId === data.bookId) ? (
+                    <CustomButton
+                      onClickButton={() => {
+                        dispatch(deleteItem(data?.bookId));
                       }}
                     >
-                      <CurrencyRupeeIcon style={{ width: "20px" }} />
-                      {data.bookPrice}
-                    </p>
-                    {myBookList.some((x) => x.bookId === data.bookId) ? (
-                      <Link href={`/discover/${data.bookId}`}>
-                        <CustomButton>View Book</CustomButton>
-                      </Link>
-                    ) : cartItems.some((x) => x.bookId === data.bookId) ? (
-                      <CustomButton
-                        onClickButton={() => {
-                          dispatch(deleteItem(data?.bookId));
-                        }}
-                      >
-                        Remove from cart
-                      </CustomButton>
-                    ) : (
-                      <CustomButton
-                        onClickButton={() => {
-                          dispatch(addItem(data));
-                        }}
-                      >
-                        Add to cart
-                      </CustomButton>
-                    )}
-                  </div>
-                </SimplePaper>
-              );
-            })
+                      Remove from cart
+                    </CustomButton>
+                  ) : (
+                    <CustomButton
+                      onClickButton={() => {
+                        dispatch(addItem(data));
+                      }}
+                    >
+                      Add to cart
+                    </CustomButton>
+                  )}
+                </div>
+              </SimplePaper>
+            );
+          })
         ) : (
           <div className={styles.noBooksFound}>
-            Uh Oh! No Books Found
-            <Link href="/discover">Go to Discover</Link>
+            <p>Uh Oh! No Books Found</p>
+            <CustomButton
+              onClickButton={() => {
+                setFilterValues([]);
+              }}
+            >
+              Clear Filter &nbsp;
+              <CloseIcon/>
+            </CustomButton>
           </div>
         )}
       </div>
