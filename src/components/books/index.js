@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import SelectLabels from "@/organisms/Select";
 import SelectCheckbox from "@/organisms/SelectCheckbox";
 import { FILTER_LIST, SORT_LIST } from "@/constants";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 const Books = (props) => {
   const { bookList = [] } = props;
@@ -29,6 +29,8 @@ const Books = (props) => {
   }, []);
 
   const BookListData = useMemo(() => {
+    const isFilterValuesPresent =
+      filterValues.reduce((r, e) => (r.push(...e.values), r), []).length > 0;
     const filterList = myBookList
       ? myBookList.length > 0 &&
         myBookList
@@ -40,10 +42,7 @@ const Books = (props) => {
               : ""
           )
           .filter((x) => {
-            if (
-              filterValues.reduce((r, e) => (r.push(...e.values), r), [])
-                .length > 0
-            ) {
+            if (isFilterValuesPresent) {
               const flagArray = [];
               for (let item of filterValues) {
                 if (
@@ -72,8 +71,8 @@ const Books = (props) => {
                   <Link href={`/discover/${data.bookId}`}>
                     <Image
                       src={data.bookCover}
-                      width={200}
-                      height={300}
+                      width={170}
+                      height={250}
                       alt={data.bookTitle}
                     />
                   </Link>
@@ -85,7 +84,7 @@ const Books = (props) => {
                       marginTop: "0",
                     }}
                   >
-                    <CurrencyRupeeIcon style={{ width: "20px" }} />
+                    <CurrencyRupeeIcon style={{ width: "15px" }} />
                     {data.bookPrice}
                   </p>
                   {myBookList.some((x) => x.bookId === data.bookId) ? (
@@ -116,14 +115,16 @@ const Books = (props) => {
         ) : (
           <div className={styles.noBooksFound}>
             <p>Uh Oh! No Books Found</p>
-            <CustomButton
-              onClickButton={() => {
-                setFilterValues([]);
-              }}
-            >
-              Clear Filter &nbsp;
-              <CloseIcon/>
-            </CustomButton>
+            {myBookList?.length > 0 && (
+              <CustomButton
+                onClickButton={() => {
+                  setFilterValues([]);
+                }}
+              >
+                Clear Filter &nbsp;
+                <CloseIcon />
+              </CustomButton>
+            )}
           </div>
         )}
       </div>

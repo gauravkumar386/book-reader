@@ -45,8 +45,8 @@ export default function Home() {
             <div className={styles.title}>Popular Now</div>
             <Image
               src={rightArrow}
-              width={40}
-              height={30}
+              width={30}
+              height={22}
               alt="next"
               style={{ cursor: "pointer" }}
             />
@@ -59,8 +59,8 @@ export default function Home() {
                     <Link href={`/discover/${book.bookId}`}>
                       <Image
                         src={book.bookCover}
-                        width={200}
-                        height={300}
+                        width={150}
+                        height={225}
                         alt={book.bookTitle}
                       />
                     </Link>
@@ -79,8 +79,8 @@ export default function Home() {
               <div key={index} className={styles.bookContainer}>
                 <Image
                   src={book.bookCover}
-                  width={260}
-                  height={380}
+                  width={170}
+                  height={250}
                   alt={book.bookTitle}
                 />
                 <div className={styles.description}>

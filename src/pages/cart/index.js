@@ -83,9 +83,9 @@ const Cart = () => {
         </div>
       ) : (
         <div className={styles.emptyCartContainer}>
-          <Image src={emptyCart} width={150} height={150} alt="empty" />
-          <p style={{ fontSize: "45px", marginBottom: "10px" }}>Uh Oh! </p>
-          <p style={{ fontSize: "35px", marginTop: "0" }}>Your cart is empty</p>
+          <Image src={emptyCart} width={100} height={100} alt="empty" />
+          <p style={{ fontSize: "30px", marginBottom: "10px" }}>Uh Oh! </p>
+          <p style={{ fontSize: "20px", marginTop: "0" }}>Your cart is empty</p>
           <Link href="/discover">Go to Discover</Link>
         </div>
       )}

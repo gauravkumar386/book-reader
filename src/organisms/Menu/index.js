@@ -34,7 +34,7 @@ const MenuBar = (props) => {
                 menuData.onClickData()
               }}
               key={index}
-              sx={{ padding: 2, width: 150 }}
+              sx={{ padding: 1.5, width: 130 }}
             >
               {menuData.icon}&nbsp;&nbsp;
               {menuData.name}

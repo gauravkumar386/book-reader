@@ -9,7 +9,7 @@ import {
   Select,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import styles from "./SelectCheckbox.module.scss";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -53,7 +53,7 @@ const SelectCheckbox = (props) => {
   };
 
   return (
-    <div>
+    <div className={styles.selectCheckbox}>
       <FormControl sx={{ width: 240 }}>
         <InputLabel id="demo-multiple-checkbox-label">{label}</InputLabel>
         <Select
@@ -65,6 +65,8 @@ const SelectCheckbox = (props) => {
           input={<OutlinedInput label={label} />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
+          size="small"
+          sx={{ fontSize: 12 }}
         >
           <MenuItem
             value=""
@@ -72,7 +74,8 @@ const SelectCheckbox = (props) => {
               display: "flex",
               justifyContent: "space-between",
               color: "rgba(255,0,0)",
-              padding: "15px 20px"
+              padding: "10px 20px",
+              fontSize: "14px",
             }}
             onClick={() => setFilterValues([])}
           >
@@ -85,7 +88,11 @@ const SelectCheckbox = (props) => {
                 <ListSubheader>{data.label}</ListSubheader>
                 {data.values?.map((value, index1) => {
                   return (
-                    <MenuItem value={value} key={index + "-" + index1}>
+                    <MenuItem
+                      value={value}
+                      key={index + "-" + index1}
+                      sx={{ padding: 0.7 }}
+                    >
                       <Checkbox
                         checked={filterValues
                           .find((x) => x.label === data.label)

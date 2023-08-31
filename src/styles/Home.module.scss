@@ -7,10 +7,10 @@
     .leftContainer {
       width: 90%;
       .title {
-        font-size: 50px;
+        font-size: 30px;
       }
       .subtitle {
-        font-size: 20px;
+        font-size: 17px;
         margin: 20px 0;
       }
       a {
@@ -27,7 +27,7 @@
         padding: 30px 0;
         gap: 20px;
         .title {
-          font-size: 28px;
+          font-size: 22px;
         }
       }
       .items {
@@ -52,7 +52,7 @@
           }
           p {
             width: 70%;
-            font-size: 20px;
+            font-size: 14px;
           }
         }
       }
@@ -62,7 +62,7 @@
       padding: 10px 30px 0 30px;
       .header {
         p {
-          font-size: 20px;
+          font-size: 14px;
           margin-bottom: 15px;
         }
       }
@@ -91,11 +91,12 @@
         justify-content: space-between;
         .descriptionData {
           .title {
-            font-size: 30px;
+            font-size: 22px;
             font-weight: 500;
           }
           .shortDescription {
             width: 70%;
+            font-size: 14px;
           }
         }
       }

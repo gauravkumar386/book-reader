@@ -65,7 +65,7 @@ const Header = ({ setDarkMode }) => {
   }, [darkMode]);
 
   const navigateToProfile = () => {
-    window.location.href = "/settings";
+    router.push("/settings");
   };
 
   const logout = () => {
@@ -91,6 +91,7 @@ const Header = ({ setDarkMode }) => {
             id="free-solo-2-demo"
             disableClearable
             sx={{ width: 400 }}
+            size="small"
             options={bookList.map((option) => option.bookTitle)}
             value={searchQuery}
             onChange={(event,newValue)=>{

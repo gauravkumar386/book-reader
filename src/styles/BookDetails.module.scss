@@ -11,20 +11,19 @@
         0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     .upperRight {
-      border-bottom: 1px solid rgb(0, 0, 0, 0.1);
       margin: 0 60px 0 60px;
       width: 45%;
       p:first-child {
-        font-size: 38px;
+        font-size: 27px;
         margin-top: 0;
       }
       p:nth-child(3) {
-        font-size: 20px;
+        font-size: 15px;
         font-style: italic;
         letter-spacing: 0.5px;
       }
       p:nth-child(4) {
-        font-size: 25px;
+        font-size: 18 px;
       }
       .buttonContainer {
         display: flex;
@@ -34,20 +33,16 @@
           width: 30%;
           display: flex;
           justify-content: space-between;
-          span {
-            height: 25px;
+          svg {
             border-radius: 50%;
             overflow: visible;
-            padding: 10px;
+            padding: 6px;
             background-color: rgb(236, 237, 237);
             transition-duration: 0.3s;
             border: 1px solid #000;
             cursor: pointer;
           }
-          .image{
-            cursor: pointer;
-          }
-          span:hover {
+          svg:hover {
             transition-duration: 0.3s;
             transition-delay: 0.2s;
             border: 1px solid rgb(202, 193, 193);
@@ -60,27 +55,22 @@
     }
   }
   .lowerContainer {
-    position: absolute;
-    bottom: -24rem;
-    z-index: -1;
     background-color: #f7f6f6;
-    min-height: 330px;
+    min-height: 300px;
     display: flex;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
     justify-content: center;
-    padding: 120px 20px 0 20px;
+    padding: 20px 20px 0 20px;
     margin: 0 60px 0 5px;
-    gap: 100px;
+    gap: 50px;
     .lowerLeft {
-      width: 60%;
+      width: 80%;
       .descriptionData {
         p:first-child {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
         }
         p:last-child {
-          font-size: 15px;
+          font-size: 14px;
           width: 90%;
           line-height: 1.6;
         }
@@ -91,15 +81,18 @@
           border-radius: 50%;
           margin-right: 20px;
         }
+        .description p{
+          font-size: 14px;
+        }
       }
     }
     .lowerRight {
       p:first-child {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
       }
       p:last-child {
-        font-size: 15px;
+        font-size: 14px;
       }
     }
   }

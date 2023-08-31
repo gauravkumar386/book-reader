@@ -1,11 +1,11 @@
 .discoverComponent {
     padding: 1rem 5rem;
     .title {
-      font-size: 45px;
+      font-size: 30px;
       margin: 20px 0;
     }
     .subtitle {
-      font-size: 20px;
+      font-size: 17px;
       max-width: 55%;
       margin: 20px 0;
     }
@@ -19,7 +19,7 @@
         cursor: pointer;
         margin-right: 20px;
         border-radius: 50%;
-        padding: 20px;
+        padding: 12px;
         overflow: visible;
         border: 1px solid rgb(192, 193, 195);
       }
@@ -42,7 +42,7 @@
       }
       P {
         max-width: 70%;
-        font-size: 20px;
+        font-size: 14px;
       }
     }
   }

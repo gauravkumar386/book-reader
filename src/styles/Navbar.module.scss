@@ -14,13 +14,13 @@
     align-items: center;
     .logo {
       padding: 2rem 0;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
     }
     p{
       font-family: cursive;
       margin-left: 1.5rem;
-      font-size: 20px;
+      font-size: 18px;
     }
   }
   .navbarContainer {
@@ -34,16 +34,18 @@
       cursor: pointer;
       p {
         margin-left: 15px;
-        font-size: 15px;
+        font-size: 13px;
       }
     }
     .hoverItem:hover {
       background-color: rgb(202, 193, 193);
     }
     svg {
-      padding: 15px;
+      padding: 12px;
       cursor: pointer;
       overflow: visible;
+      height: 20px;
+      width: 20px;
     }
     svg:hover {
       border-radius: 50%;

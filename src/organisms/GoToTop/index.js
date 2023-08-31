@@ -16,7 +16,7 @@ const GoToTop = () => {
         scrollToPage();
       }}
     >
-      <KeyboardArrowUpIcon sx={{ fontSize: "40px", color: "#fff" }} />
+      <KeyboardArrowUpIcon sx={{ fontSize: "30px", color: "#fff" }} />
     </div>
   );
 };

@@ -18,12 +18,18 @@
   .leftHeader {
     position: relative;
     width: 70%;
+    label{
+      font-size: 14px;
+    }
     input {
       min-width: 370px;
       height: 22px;
-      font-size: 14px;
+      font-size: 12px;
       outline: none;
       cursor: pointer;
+    }
+    input::placeholder{
+      font-size: 12px;
     }
   }
   .rightHeader {
@@ -33,21 +39,21 @@
     width: 30%;
     svg {
       cursor: pointer;
-      height: 35px;
-      width: 35px;
+      height: 30px;
+      width: 30px;
       color: #000;
     }
     .profileDetails{
       cursor: pointer;
       display: flex;
       align-items: center;
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 600;
     }
     a {
       text-decoration: none;
       p {
-        font-size: 20px;
+        font-size: 15px;
         color: #000;
         font-weight: 600;
       }

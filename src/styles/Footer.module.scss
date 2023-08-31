@@ -1,16 +1,19 @@
 .footerBody{
-    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 220px;
     background: rgb(222, 216, 216);
-    margin-top: 20rem;
+    margin-top: 5rem;
     .socialLinks{
         display: flex;
         justify-content: center;
         gap: 2rem;
-        padding: 3rem 0 2rem 0;
+        padding: 1.5rem 0 1.5rem 0;
         svg{
             cursor: pointer;
-            height: 2rem;
-            width: 2rem;
+            height: 1.4rem;
+            width: 1.4rem;
             color: #fff;
             background: #000;
             border-radius: 50%;
@@ -26,11 +29,12 @@
         a{
             text-decoration: none;
             color: #000;
-            font-size: 15px;
+            font-size: 12px;
         }
     }
     .copyright{
         @extend .infoLinks;
         gap: 0;
+        font-size: 15px;
     }
 }

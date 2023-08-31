@@ -26,7 +26,7 @@ const Navbar = (props) => {
       >
         <Link style={{ display: "flex" }} href="/">
           <AutoStoriesIcon
-            style={{ marginLeft: isMenuOpen ? "20px" : "" }}
+            style={{ marginLeft: isMenuOpen ? "16px" : "" }}
             className={styles.logo}
           />
           {isMenuOpen && <p style={{ fontStyle: "oblique" }}>Book Reader</p>}

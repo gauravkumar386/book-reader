@@ -74,8 +74,8 @@ const BookDetails = () => {
             <Image
               className={styles.cover}
               src={bookDetails?.bookCover}
-              width={275}
-              height={400}
+              width={210}
+              height={325}
               alt={bookDetails?.bookTitle}
             />
             <div className={styles.upperRight}>
@@ -83,7 +83,7 @@ const BookDetails = () => {
               <p> - {bookDetails?.author}</p>
               <p>{bookDetails?.shortDescription}</p>
               <p>
-                <Image src={rupee} width={20} height={20} alt="currency" />
+                <Image src={rupee} width={16} height={16} alt="currency" />
                 {bookDetails?.bookPrice}
               </p>
               <div className={styles.buttonContainer}>
@@ -126,14 +126,14 @@ const BookDetails = () => {
                 <p>Description</p>
                 <p>{bookDetails?.description}</p>
               </div>
-              <div className={styles.reviewList}>
+              {/* <div className={styles.reviewList}>
                 {bookDetails?.reviews.map((user, index) => {
                   return (
                     <div key={index} className={styles.reviewBody}>
                       <Image
                         src={user.userImage}
-                        width={70}
-                        height={70}
+                        width={50}
+                        height={50}
                         alt="user"
                       />
                       <div className={styles.description}>
@@ -143,7 +143,7 @@ const BookDetails = () => {
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
             <div className={styles.lowerRight}>
               <div className={styles.editors}>

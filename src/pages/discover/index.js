@@ -75,8 +75,8 @@ const Discover = () => {
                 <Link href={`/discover/${book.bookId}`}>
                   <Image
                     src={book.bookCover}
-                    width={200}
-                    height={300}
+                    width={170}
+                    height={250}
                     alt={book.bookTitle}
                   />
                 </Link>
