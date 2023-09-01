@@ -34,9 +34,6 @@ const BookDetails = () => {
 
   useEffect(() => {
     const bookDetail = bookList.find((book) => book.bookId === bookId);
-    if(bookDetail===undefined){
-      route.push('/404')
-    }
     setIsPurchased(
       myBookList && myBookList.some((x) => x.bookId === bookDetail?.bookId)
     );

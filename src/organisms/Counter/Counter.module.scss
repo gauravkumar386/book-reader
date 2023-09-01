@@ -1,0 +1,17 @@
+.counterContainer{
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #fff;
+    background: #000;
+    p{
+        padding: 0 10px;
+    }
+    button{
+        height: 40px;
+        svg{
+            font-size: 20px;
+        }
+    }
+}

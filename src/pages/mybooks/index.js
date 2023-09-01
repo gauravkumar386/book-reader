@@ -2,7 +2,10 @@ import Books from "@/components/books";
 import SimpleBreadcrumbs from "@/organisms/Breadcrumbs";
 import GoToTop from "@/organisms/GoToTop";
 import styles from "@/styles/MyBooks.module.scss";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+
+const DynamicBookList = dynamic(()=>import("../../components/books"))
 
 const MyBooks = () => {
   const [myBooksList, setMyBooksList] = useState([]);
@@ -12,7 +15,7 @@ const MyBooks = () => {
   return (
     <div className={styles.myBooksContainer}>
       <SimpleBreadcrumbs/>
-      <Books bookList={myBooksList} />
+      <DynamicBookList bookList={myBooksList} />
       <GoToTop/>
     </div>
   );

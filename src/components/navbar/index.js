@@ -6,7 +6,7 @@ import styles from "@/styles/Navbar.module.scss";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { MyContext } from "@/shared/MyContext";
+import { MyContext } from "@/shared/context/MyContext";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 const Navbar = (props) => {
@@ -24,7 +24,7 @@ const Navbar = (props) => {
           display: !isMenuOpen ? "flex" : "",
         }}
       >
-        <Link style={{ display: "flex" }} href="/">
+        <Link style={{ display: "flex" }} href="/" prefetch={false}>
           <AutoStoriesIcon
             style={{ marginLeft: isMenuOpen ? "16px" : "" }}
             className={styles.logo}
@@ -38,7 +38,7 @@ const Navbar = (props) => {
           {navigation.map((data, key) => {
             const link = data.link.split("/")[1];
             return (
-              <Link href={data?.link} key={key}>
+              <Link href={data?.link} key={key} prefetch={false}>
                 <div
                   className={`${styles.navbarItems} ${
                     isMenuOpen ? styles.hoverItem : ""
@@ -68,7 +68,7 @@ const Navbar = (props) => {
       </div>
       <div
         style={{ width: isMenuOpen ? "82%" : "92%" }}
-        className={styles.childrenBody}
+        className={`${isMenuOpen ? styles.overlay : ""}`}
       >
         {props.children}
       </div>

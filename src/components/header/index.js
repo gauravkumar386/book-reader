@@ -15,14 +15,16 @@ import TextField from "@mui/material/TextField";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { createPortal } from "react-dom";
-import { MyContext } from "@/shared/MyContext";
+import { MyContext } from "@/shared/context/MyContext";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "@mui/icons-material/Logout";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuBar from "@/organisms/Menu";
+import dynamic from "next/dynamic";
 
 const modalContent =
   typeof document !== "undefined" && document.getElementById("modal-root");
+const DynamicLogin = dynamic(() => import("../login"));
 
 const Header = ({ setDarkMode }) => {
   const router = useRouter();
@@ -76,10 +78,7 @@ const Header = ({ setDarkMode }) => {
   return (
     <>
       {domReady &&
-        createPortal(
-          show && <LoginComponent setShow={setShow} />,
-          modalContent
-        )}
+        createPortal(show && <DynamicLogin setShow={setShow} />, modalContent)}
       <div
         className={`${styles.headerComponent} ${
           pageOffset >= 40 ? styles.showBackground : ""
@@ -94,8 +93,8 @@ const Header = ({ setDarkMode }) => {
             size="small"
             options={bookList.map((option) => option.bookTitle)}
             value={searchQuery}
-            onChange={(event,newValue)=>{
-              setSearchQuery(newValue.bookTitle)
+            onChange={(event, newValue) => {
+              setSearchQuery(newValue.bookTitle);
               // const bookId = (bookList.find((x)=>x.bookTitle===newValue))?.bookId
               // router.push(`/discover/${bookId}`);
             }}
@@ -109,7 +108,7 @@ const Header = ({ setDarkMode }) => {
                 }}
               />
             )}
-            onKeyDown={(event,keyValue) => {
+            onKeyDown={(event, keyValue) => {
               if (event.key === "Enter") {
                 event.defaultMuiPrevented = true;
                 const book = bookList.find(
@@ -175,7 +174,7 @@ const Header = ({ setDarkMode }) => {
               Login/SignUp
             </CustomButton>
           )}
-          <Link href="/cart">
+          <Link href="/cart" prefetch={false}>
             <ShoppingCartOutlinedIcon />
             <p>{state.cartItems.length}</p>
           </Link>

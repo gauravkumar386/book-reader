@@ -17,7 +17,7 @@
       width: 30px;
       height: 30px;
     }
-    p{
+    p {
       font-family: cursive;
       margin-left: 1.5rem;
       font-size: 18px;
@@ -52,4 +52,12 @@
       background-color: rgb(202, 193, 193);
     }
   }
+}
+.overlay {
+  overflow-y: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(138, 137, 137, 0.8); /* color */
+  opacity: 0.3;
+  pointer-events: none;
 }

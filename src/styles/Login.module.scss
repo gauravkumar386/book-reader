@@ -4,9 +4,9 @@
   top: 50vh;
   left: 50vw;
   transform: translate(-50%, -50%);
-  min-height: 550px;
+  min-height: 400px;
   height: auto;
-  max-width: 800px;
+  max-width: 650px;
   width: auto;
   background: #fff;
   background: linear-gradient(
@@ -21,11 +21,11 @@
     justify-content: space-around;
     span {
       width: 50%;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
       border-bottom: 1px solid rgb(0, 0, 0, 0.3);
       border-left: 1px solid #ccc;
-      padding: 25px 0;
+      padding: 20px 0;
       outline: none;
       cursor: pointer;
       text-align: center;
@@ -38,15 +38,15 @@
     }
   }
   .loginBody {
-    min-height: 380px;
+    min-height: 350px;
     form{
-      margin: 5rem 10rem 0 10rem;
+      margin: 3rem 8rem 0 8rem;
       svg{
-        font-size: 30px;
+        font-size: 25px;
         cursor: pointer;
         position: absolute;
-        top: 15.8rem;
-        right: 10rem;
+        top: 13rem;
+        right: 8rem;
       }
     }
   }

@@ -75,7 +75,7 @@ const Cart = () => {
             {subTotal}
           </div>
           <div className={styles.buttonContainer}>
-            <Link href="/discover">
+            <Link href="/discover" prefetch={false}>
               <CustomButton>Continue Browsing</CustomButton>
             </Link>
             <CustomButton onClickButton={checkoutItem}>Checkout</CustomButton>
@@ -86,7 +86,7 @@ const Cart = () => {
           <Image src={emptyCart} width={100} height={100} alt="empty" />
           <p style={{ fontSize: "30px", marginBottom: "10px" }}>Uh Oh! </p>
           <p style={{ fontSize: "20px", marginTop: "0" }}>Your cart is empty</p>
-          <Link href="/discover">Go to Discover</Link>
+          <Link href="/discover" prefetch={false}>Go to Discover</Link>
         </div>
       )}
     </>

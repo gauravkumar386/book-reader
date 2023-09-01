@@ -13,12 +13,12 @@ import { FILTER_LIST, SORT_LIST } from "@/constants";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Books = (props) => {
+  const dispatch = useDispatch();
   const { bookList = [] } = props;
   const cartItems = useSelector((state) => state.cartItems);
   const [myBookList, setMyBookList] = useState([]);
   const [sortBy, setSortBy] = useState("");
   const [filterValues, setFilterValues] = useState([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (bookList?.length > 0) {
@@ -27,6 +27,18 @@ const Books = (props) => {
       setMyBookList(JSON.parse(localStorage.getItem("myBooks")));
     }
   }, []);
+
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver((entries) => {
+  //     console.log("intersectingObserver", entries);
+  //     entries.forEach((entry) => {
+  //       const intersecting = entry.isIntersecting;
+  //       entry.target.style.backgroundColor = intersecting ? "blue" : "green";
+  //       console.log("intersecting", intersecting, entry);
+  //     });
+  //   });
+  //   observer.observe(document.getElementById("bookList"))
+  // }, []);
 
   const BookListData = useMemo(() => {
     const isFilterValuesPresent =
@@ -62,13 +74,13 @@ const Books = (props) => {
           })
       : "";
     return (
-      <div className={styles.bookList}>
+      <div className={styles.bookList} id="bookList">
         {filterList && filterList.length > 0 ? (
           filterList.map((data, index) => {
             return (
               <SimplePaper key={index} styles={{ marginBottom: "30px" }}>
                 <div className={styles.bookData}>
-                  <Link href={`/discover/${data.bookId}`}>
+                  <Link href={`/discover/${data.bookId}`} prefetch={false}>
                     <Image
                       src={data.bookCover}
                       width={170}
@@ -88,7 +100,7 @@ const Books = (props) => {
                     {data.bookPrice}
                   </p>
                   {myBookList.some((x) => x.bookId === data.bookId) ? (
-                    <Link href={`/discover/${data.bookId}`}>
+                    <Link href={`/discover/${data.bookId}`} prefetch={false}>
                       <CustomButton>View Book</CustomButton>
                     </Link>
                   ) : cartItems.some((x) => x.bookId === data.bookId) ? (

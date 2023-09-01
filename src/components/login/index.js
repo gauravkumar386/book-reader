@@ -15,17 +15,15 @@ const LoginComponent = ({ setShow }) => {
 
   const loginFooter = useMemo(() => {
     return (
-      <div
-        className={styles.loginFooter}
-      >
-        <CustomButton minWidth={"300px"} onClickButton={() => setShow(false)}>
+      <div className={styles.loginFooter}>
+        <CustomButton minWidth={"250px"} onClickButton={() => setShow(false)}>
           Cancel
         </CustomButton>
         {isLoginBody ? (
           <CustomButton
             type="submit"
             disabled={isSubmitting}
-            minWidth={"300px"}
+            minWidth={"250px"}
           >
             Login
           </CustomButton>
@@ -33,7 +31,7 @@ const LoginComponent = ({ setShow }) => {
           <CustomButton
             type="submit"
             disabled={isSubmitting}
-            minWidth={"300px"}
+            minWidth={"250px"}
           >
             SignUp
           </CustomButton>
@@ -82,7 +80,7 @@ const LoginComponent = ({ setShow }) => {
               return errors;
             }}
             onSubmit={(values) => {
-              localStorage.setItem('loggedInUser',JSON.stringify(values))
+              localStorage.setItem("loggedInUser", JSON.stringify(values));
               setShow(false);
               setIsSubmitting(true);
               window.location.reload();
@@ -98,7 +96,12 @@ const LoginComponent = ({ setShow }) => {
               isSubmitting,
             }) => (
               <form onSubmit={handleSubmit}>
-                <Input label="Email Address" name="email" type="email" />
+                <Input
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  style={{ marginBottom: "1rem" }}
+                />
                 <Input
                   label="Password"
                   name="password"
@@ -109,7 +112,13 @@ const LoginComponent = ({ setShow }) => {
                 ) : (
                   <VisibilityOffIcon onClick={() => setShowPassword(true)} />
                 )}
-                <Link href="/settings">forgot password?</Link>
+                <Link
+                  href="/settings"
+                  prefetch={false}
+                  onClick={() => setShow(false)}
+                >
+                  forgot password?
+                </Link>
                 {loginFooter}
               </form>
             )}
@@ -153,7 +162,7 @@ const LoginComponent = ({ setShow }) => {
               return errors;
             }}
             onSubmit={(values) => {
-              localStorage.setItem('loggedInUser',JSON.stringify(values))
+              localStorage.setItem("loggedInUser", JSON.stringify(values));
               setIsSubmitting(true);
               setShow(false);
             }}
@@ -168,7 +177,7 @@ const LoginComponent = ({ setShow }) => {
               isSubmitting,
             }) => (
               <form
-                style={{ margin: "1rem 10rem 0 10rem" }}
+                style={{ margin: "1rem 8rem 0 8rem" }}
                 onSubmit={handleSubmit}
               >
                 <Input label="User Name" name="userName" type="text" />
@@ -180,12 +189,12 @@ const LoginComponent = ({ setShow }) => {
                 />
                 {showPassword ? (
                   <VisibilityIcon
-                    style={{ top: "17rem" }}
+                    style={{ top: "14rem" }}
                     onClick={() => setShowPassword(false)}
                   />
                 ) : (
                   <VisibilityOffIcon
-                    style={{ top: "17rem" }}
+                    style={{ top: "14rem" }}
                     onClick={() => setShowPassword(true)}
                   />
                 )}
@@ -196,12 +205,12 @@ const LoginComponent = ({ setShow }) => {
                 />
                 {showConfirmPassword ? (
                   <VisibilityIcon
-                    style={{ top: "22rem" }}
+                    style={{ top: "18rem" }}
                     onClick={() => setShowConfirmPassword(false)}
                   />
                 ) : (
                   <VisibilityOffIcon
-                    style={{ top: "22rem" }}
+                    style={{ top: "18rem" }}
                     onClick={() => setShowConfirmPassword(true)}
                   />
                 )}

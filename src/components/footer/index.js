@@ -9,24 +9,34 @@ const Footer = () => {
   return (
     <div className={styles.footerBody}>
       <div className={styles.socialLinks}>
-        <Link href="">
+        <Link href="" prefetch={false}>
           <FacebookIcon />
         </Link>
-        <Link href="">
+        <Link href="" prefetch={false}>
           <InstagramIcon />
         </Link>
-        <Link href="">
+        <Link href="" prefetch={false}>
           <TwitterIcon />
         </Link>
       </div>
       <div className={styles.infoLinks}>
-        <Link href="">Info</Link>
-        <Link href="">Support</Link>
-        <Link href="">Marketing</Link>
+        <Link href="" prefetch={false}>
+          Info
+        </Link>
+        <Link href="" prefetch={false}>
+          Support
+        </Link>
+        <Link href="" prefetch={false}>
+          Marketing
+        </Link>
       </div>
       <div className={styles.infoLinks}>
-        <Link href="">Terms of Use</Link>
-        <Link href="">Privacy Policy</Link>
+        <Link href="" prefetch={false}>
+          Terms of Use
+        </Link>
+        <Link href="" prefetch={false}>
+          Privacy Policy
+        </Link>
       </div>
       <div className={styles.copyright}>
         <CopyrightIcon /> 2023 Book Reader

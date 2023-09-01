@@ -5,9 +5,10 @@ import Navbar from "@/components/navbar";
 import "@/styles/globals.scss";
 import cartReducer from "@/redux/reducer/cartReducer";
 import { createContext, useEffect, useState } from "react";
-import { MyContext } from "@/shared/MyContext";
+import { MyContext } from "@/shared/context/MyContext";
 import ErrorBoundary from "@/shared/errorBoundary";
 import Footer from "@/components/footer";
+import dynamic from "next/dynamic";
 
 const store = createStore(cartReducer);
 const LightModeContext = createContext();
@@ -15,6 +16,10 @@ const LightModeContext = createContext();
 const loggedInUser =
   typeof localStorage !== "undefined" &&
   JSON.parse(localStorage.getItem("loggedInUser"));
+
+const DynamicNavbar = dynamic(() => import("../components/navbar"));
+const DynamicHeader = dynamic(() => import("../components/header"));
+const DynamicFooter = dynamic(() => import("../components/footer"));
 
 export default function App({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(false);
@@ -27,13 +32,13 @@ export default function App({ Component, pageProps }) {
       <div id="app-root">
         <Provider store={store}>
           <MyContext.Provider value={{ darkMode, loggedInUsers }}>
-            <Navbar>
-              <Header setDarkMode={setDarkMode} />
+            <DynamicNavbar>
+              <DynamicHeader setDarkMode={setDarkMode} />
               <ErrorBoundary>
                 <Component {...pageProps} />
               </ErrorBoundary>
-              <Footer />
-            </Navbar>
+              <DynamicFooter />
+            </DynamicNavbar>
           </MyContext.Provider>
         </Provider>
       </div>

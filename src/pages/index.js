@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import rightArrow from "../../public/assets/right-arrow.png";
 import { Button } from "@mui/material";
 import CustomButton from "@/organisms/Button";
-import { MyContext } from "@/shared/MyContext";
+import { MyContext } from "@/shared/context/MyContext";
 import GoToTop from "@/organisms/GoToTop";
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
             {`Wow! you've delved deep into the wizarding world's secrets. Have Harry's parents died yet?
            Oops, looks like you're not there yet. Get Reading now!`}
           </div>
-          <Link href="/discover">
+          <Link href="/discover" prefetch={false}>
             <CustomButton>{"Start Reading ->"}</CustomButton>
           </Link>
         </div>
@@ -56,7 +56,7 @@ export default function Home() {
               if (index % 2 === 0 && index < 8) {
                 return (
                   <div className={styles.carouselItem} key={index}>
-                    <Link href={`/discover/${book.bookId}`}>
+                    <Link href={`/discover/${book.bookId}`} prefetch={false}>
                       <Image
                         src={book.bookCover}
                         width={150}
@@ -91,7 +91,7 @@ export default function Home() {
                     </p>
                     <p>- {book.author}</p>
                   </div>
-                  <Link href={`/discover/${book.bookId}`}>
+                  <Link href={`/discover/${book.bookId}`} prefetch={false}>
                     <CustomButton>View Book</CustomButton>
                   </Link>
                 </div>

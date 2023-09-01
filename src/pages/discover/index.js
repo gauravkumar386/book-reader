@@ -38,6 +38,7 @@ const Discover = () => {
       </div>
       <Link
         href="/discover"
+        prefetch={false}
         onClick={(e) => {
           let bookListDiv = document.getElementById("bookListDiv");
           e.preventDefault();
@@ -72,7 +73,7 @@ const Discover = () => {
           {bookList.map((book, index) => {
             return (
               <div className={styles.carouselItem} key={index}>
-                <Link href={`/discover/${book.bookId}`}>
+                <Link href={`/discover/${book.bookId}`} prefetch={false}>
                   <Image
                     src={book.bookCover}
                     width={170}

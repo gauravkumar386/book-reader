@@ -35,6 +35,7 @@ const SimpleBreadcrumbs = () => {
                 key={index}
                 underline="hover"
                 color="inherit"
+                prefetch={false}
                 href={data?.link}
                 style={{
                   opacity: "0.6",

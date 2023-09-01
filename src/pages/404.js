@@ -12,7 +12,7 @@ const NotFound = () => {
       }}
     >
       <h1>404! - Page Not Found</h1>
-      <Link href={"/"}>
+      <Link href={"/"} prefetch={false}>
         <CustomButton>Go to Homepage</CustomButton>
       </Link>
     </div>
