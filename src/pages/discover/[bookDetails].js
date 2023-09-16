@@ -74,6 +74,7 @@ const BookDetails = () => {
               width={210}
               height={325}
               alt={bookDetails?.bookTitle}
+              loading="eager"
             />
             <div className={styles.upperRight}>
               <p>{bookDetails?.bookTitle}</p>
